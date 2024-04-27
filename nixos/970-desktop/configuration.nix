@@ -125,19 +125,6 @@
     LC_TIME = "en_AU.UTF-8";
   };
 
-  # Exclude Packages
-  environment.plasma6.excludePackages = with pkgs.kdePackages; [
-    plasma-browser-integration
-    konsole
-    oxygen
-    elisa
-    gwenview
-    kate
-    kwrited
-    okular
-    spectacle
-  ];
-
   # Configure keymap in X11
   services.xserver = {
   xkb = {
@@ -159,17 +146,8 @@
   # Enable sound with pipewire.
   sound.enable = true;
   security.rtkit.enable = true;
-  services.pipewire = {
-    enable = true;
-    alsa.enable = true;
-    alsa.support32Bit = true;
-    # If you want to use JACK applications, uncomment this
-    #jack.enable = true;
-
-    # use the example session manager (no others are packaged yet so this is enabled by default,
-    # no need to redefine it in your config for now)
-    #media-session.enable = true;
-  };
+  hardware.pulseaudio.enable = true;
+  hardware.pulseaudio.support32Bit = true;
 
   # modules/home-manager/shell.nix.old
   #programs.zsh.enable = true;
@@ -188,13 +166,13 @@
   };
 
   # Define a user account. Don't forget to set a password with ‘passwd’.
-  users.users.eternal = {
+  users.users.cinny = {
     isNormalUser = true;
-    description = "eternal";
-    extraGroups = [ "networkmanager" "wheel" ];
+    description = "cinny";
+    extraGroups = [ "networkmanager" "wheel" "audio" ];
     shell = pkgs.fish;
     packages = with pkgs; [
-      eternalvim
+      lunarvim
       spotify-player
       obs-studio
       gimp

@@ -93,7 +93,7 @@
           nur.nixosModules.nur
         ];
       };
-       970-desktop = nixpkgs.lib.nixosSystem {
+      "970-desktop" = nixpkgs.lib.nixosSystem {
         specialArgs = {inherit inputs outputs;};
         modules = [
           # > Our main nixos configuration file <

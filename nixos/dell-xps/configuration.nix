@@ -199,7 +199,7 @@
     extraGroups = [ "networkmanager" "wheel" ];
     shell = pkgs.fish;
     packages = with pkgs; [
-      eternalvim
+      lunarvim
       obsidian
       slack
       spotify-qt
