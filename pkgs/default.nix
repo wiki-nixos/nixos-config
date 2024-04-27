@@ -1,5 +1,7 @@
 # Custom packages, that can be defined similarly to ones from nixpkgs
 # You can build them using 'nix build .#example'
-pkgs: {
+
+{pkgs, ...}: {
   # example = pkgs.callPackage ./example { };
+  eternalvim = pkgs.callPackage ./eternalvim { };
 }
