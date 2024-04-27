@@ -48,7 +48,7 @@
       # Disable if you don't want unfree packages
       allowUnfree = true;
     };
-  };
+  }; 
 
   # This will add each flake input as a registry
   # To make nix3 commands consistent with your flake
@@ -78,13 +78,6 @@
     options = "--delete-older-than 7d";
   };
 
-  boot = {
-    kernelModules = [ "tp_smapi" ];
-    extraModulePackages = with config.boot.kernelPackages; [ tp_smapi ];
-  };
-
-  services.fstrim.enable = lib.mkDefault true;
-
   # Bootloader.
   boot.loader = {
     efi = {
@@ -92,17 +85,19 @@
       efiSysMountPoint = "/boot";
     };
     grub = {
-      efiSupport = false;
+      efiSupport = true;
+      # Uncomment the following line if canTouchEfiVariables doesn't work for your system
+      # efiInstallAsRemovable = true;
       device = "nodev";
       #theme  = grub/src/catppuccin-mocha-grub-theme;
-      splashImage = null;
+      #splashImage = null;
     };
   };
 
   # Use the Xanmod Kernel
   boot.kernelPackages = pkgs.linuxPackages_xanmod;
 
-  networking.hostName = "thinkpad"; # Define your hostname.
+  networking.hostName = "970-desktop"; # Define your hostname.
   # networking.wireless.enable = true;  # Enables wireless support via wpa_supplicant.
 
   # Configure network proxy if necessary
@@ -130,18 +125,36 @@
     LC_TIME = "en_AU.UTF-8";
   };
 
+  # Exclude Packages
+  environment.plasma6.excludePackages = with pkgs.kdePackages; [
+    plasma-browser-integration
+    konsole
+    oxygen
+    elisa
+    gwenview
+    kate
+    kwrited
+    okular
+    spectacle
+  ];
+
+  # Configure keymap in X11
   services.xserver = {
-    enable = true;
-     xkb = {
-      layout = "au";
-      variant = ""; 
-     };
-     desktopManager = {
-      xterm.enable = false;
-      xfce.enable = true;
-     };
-    displayManager.defaultSession = "xfce";
+  xkb = {
+    layout = "au";
+    variant = "";
   };
+   enable = true;
+   #libinput.enable = true;
+   displayManager.lightdm.enable = true;
+	 desktopManager = {
+			cinnamon.enable = true;
+	 };
+		displayManager.defaultSession = "cinnamon";
+  };
+
+  # Enable CUPS to print documents.
+  #services.printing.enable = true
 
   # Enable sound with pipewire.
   sound.enable = true;
@@ -150,13 +163,16 @@
     enable = true;
     alsa.enable = true;
     alsa.support32Bit = true;
-    pulse.enable = true;
     # If you want to use JACK applications, uncomment this
     #jack.enable = true;
+
     # use the example session manager (no others are packaged yet so this is enabled by default,
     # no need to redefine it in your config for now)
     #media-session.enable = true;
   };
+
+  # modules/home-manager/shell.nix.old
+  #programs.zsh.enable = true;
 
   # Fish
   programs.fish.enable = true;
@@ -169,28 +185,34 @@
       exec ${pkgs.fish}/bin/fish $LOGIN_OPTION
     fi
   '';
-};
+  };
 
   # Define a user account. Don't forget to set a password with ‘passwd’.
-  users.users.x200 = {
+  users.users.eternal = {
     isNormalUser = true;
-    description = "x200";
+    description = "eternal";
     extraGroups = [ "networkmanager" "wheel" ];
     shell = pkgs.fish;
     packages = with pkgs; [
-     lunarvim
-     fastfetch
-     xclip
-   ];
+      eternalvim
+      spotify-player
+      obs-studio
+      gimp
+      vesktop
+      audacity
+      weechat
+      font-awesome
+    ];
   };
 
   # List packages installed in system profile. To search, run:
   # $ nix search wget
-  environment.systemPackages = with pkgs; [];
+  environment.systemPackages = with pkgs; [
+  ];
 
-  #fonts.fonts = with pkgs; [
-  #  (nerdfonts.override { fonts = [ "FiraCode" ]; })
-  #];
+  fonts.fonts = with pkgs; [
+    (nerdfonts.override { fonts = [ "FiraCode" ]; })
+  ];
 
   # Some programs need SUID wrappers, can be configured further or are
   # started in user sessions.
@@ -204,6 +226,9 @@
 
   # Enable the OpenSSH daemon.
   services.openssh.enable = true;
+
+  # Enable the polkit daemon
+  security.polkit.enable = true;
 
   # Open ports in the firewall.
   # networking.firewall.allowedTCPPorts = [ ... ];

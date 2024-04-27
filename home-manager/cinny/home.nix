@@ -23,7 +23,6 @@
       outputs.homeManagerModules.firefox
       outputs.homeManagerModules.vscode
       outputs.homeManagerModules.btop
- #     outputs.homeManagerModules.sway
   ];
 
   nixpkgs = {
@@ -55,8 +54,8 @@
 
   # TODO: Set your username
   home = {
-    username = "eternal";
-    homeDirectory = "/home/eternal";
+    username = "cinny";
+    homeDirectory = "/home/cinny";
   };
 
   # Add stuff for your user as you see fit:
