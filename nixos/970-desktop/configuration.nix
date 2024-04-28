@@ -140,8 +140,8 @@
    enable = true;
   };
 
-  environment.plasma6.excludePackages = with pkgs.cinnamon; [
-    # none
+  environment.cinnamon.excludePackages = with pkgs; [
+    gnome.gnome-terminal
   ];
 
   # Enable OpenGL
