@@ -140,6 +140,10 @@
    enable = true;
   };
 
+  environment.plasma6.excludePackages = with pkgs.cinnamon; [
+    # none
+  ];
+
   # Enable OpenGL
   hardware.opengl = {
     enable = true;
