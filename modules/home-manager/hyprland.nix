@@ -7,7 +7,7 @@
 
   settings = {
     exec-once = [
-      "/etc/nixos/swwwchange.sh /etc/nixos/wallpapers"
+      "/etc/nixos/modules/home-manager/scripts/swwwchange.sh /etc/nixos/wallpapers"
       "waybar"
       "dunst"
       "hyprctl setcursor Bibata-Modern-Classic 24"

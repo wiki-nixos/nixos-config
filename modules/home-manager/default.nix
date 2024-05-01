@@ -14,5 +14,5 @@
   gtk = import ./gtk.nix;
   hyprland = import ./hyprland.nix;
   waybar = import ./waybar.nix;
-#  sway = import ./sway.nix;
+  zsh = import ./zsh.nix;
 }

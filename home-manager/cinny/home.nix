@@ -19,7 +19,7 @@
     # ./nvim.nix
       outputs.homeManagerModules.git
       outputs.homeManagerModules.kitty
-      outputs.homeManagerModules.fish
+      outputs.homeManagerModules.zsh
       outputs.homeManagerModules.firefox
       outputs.homeManagerModules.vscode
       outputs.homeManagerModules.btop
@@ -65,6 +65,8 @@
   # Add stuff for your user as you see fit:
   # programs.neovim.enable = true;
   # home.packages = with pkgs; [ steam ];
+
+  home.packages = with pkgs; [ dconf ];
 
   # Enable home-manager
   programs.home-manager.enable = true;

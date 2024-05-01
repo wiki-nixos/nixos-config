@@ -184,6 +184,7 @@
     enable = true;
     alsa.enable = true;
     alsa.support32Bit = true;
+    pulse.enable = true;
     # If you want to use JACK applications, uncomment this
     #jack.enable = true;
 
@@ -195,28 +196,31 @@
   hardware.bluetooth.enable = true; # enables support for Bluetooth
   hardware.bluetooth.powerOnBoot = true; # powers up the default Bluetooth controller on boot
 
-  # modules/home-manager/shell.nix.old
-  #programs.zsh.enable = true;
+  # ZSH
+  programs.zsh.enable = true;
 
   # Fish
-  programs.fish.enable = true;
+  #programs.fish.enable = true;
 
-  programs.bash = {
-  interactiveShellInit = ''
-    if [[ $(${pkgs.procps}/bin/ps --no-header --pid=$PPID --format=comm) != "fish" && -z ''${BASH_EXECUTION_STRING} ]]
-    then
-      shopt -q login_shell && LOGIN_OPTION='--login' || LOGIN_OPTION=""
-      exec ${pkgs.fish}/bin/fish $LOGIN_OPTION
-    fi
-  '';
-  };
+  # Dconf for home-manager
+  programs.dconf.enable = true;
+
+ # programs.bash = {
+ # interactiveShellInit = ''
+ #   if [[ $(${pkgs.procps}/bin/ps --no-header --pid=$PPID --format=comm) != "fish" && -z ''${BASH_EXECUTION_STRING} ]]
+ #   then
+ #     shopt -q login_shell && LOGIN_OPTION='--login' || LOGIN_OPTION=""
+ #     exec ${pkgs.fish}/bin/fish $LOGIN_OPTION
+ #   fi
+ # '';
+ # };
 
   # Define a user account. Don't forget to set a password with ‘passwd’.
   users.users.cinny = {
     isNormalUser = true;
     description = "cinny";
     extraGroups = [ "networkmanager" "wheel" "audio" ];
-    shell = pkgs.fish;
+    shell = pkgs.zsh;
     packages = with pkgs; [
       lunarvim
       spotify-player
@@ -239,6 +243,7 @@
       xfce.thunar
       grimblast
       wlogout
+      blueman
     ];
   };
 
@@ -247,7 +252,7 @@
   environment.systemPackages = with pkgs; [
   ];
 
-  fonts.fonts = with pkgs; [
+  fonts.packages = with pkgs; [
     (nerdfonts.override { fonts = [ "FiraCode" ]; })
   ];
 
