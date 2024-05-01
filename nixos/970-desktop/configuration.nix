@@ -131,18 +131,9 @@
   xkb = {
     layout = "au";
     variant = "";
-  };
-  displayManager.lightdm.enable = true;
-		desktopManager = {
-			cinnamon.enable = true;
-		};
-		displayManager.defaultSession = "cinnamon";
+   };
    enable = true;
   };
-
-  environment.cinnamon.excludePackages = with pkgs; [
-    gnome.gnome-terminal
-  ];
 
   # Enable OpenGL
   hardware.opengl = {
@@ -180,7 +171,7 @@
     nvidiaSettings = true;
 
     # Optionally, you may need to select the appropriate driver version for your specific GPU.
-    package = config.boot.kernelPackages.nvidiaPackages.legacy_470;
+    package = config.boot.kernelPackages.nvidiaPackages.latest;
   };
 
   # Enable CUPS to print documents.
@@ -189,6 +180,17 @@
   # Enable sound with pipewire.
   sound.enable = true;
   security.rtkit.enable = true;
+  services.pipewire = {
+    enable = true;
+    alsa.enable = true;
+    alsa.support32Bit = true;
+    # If you want to use JACK applications, uncomment this
+    #jack.enable = true;
+
+    # use the example session manager (no others are packaged yet so this is enabled by default,
+    # no need to redefine it in your config for now)
+    #media-session.enable = true;
+  };
 
   hardware.bluetooth.enable = true; # enables support for Bluetooth
   hardware.bluetooth.powerOnBoot = true; # powers up the default Bluetooth controller on boot
@@ -224,6 +226,19 @@
       audacity
       weechat
       font-awesome
+
+      waybar
+      waypaper
+      swww
+      bibata-cursors
+      polkit_gnome
+      rofi-wayland
+      wl-clipboard
+      nwg-look
+      pavucontrol
+      xfce.thunar
+      grimblast
+      wlogout
     ];
   };
 
@@ -248,6 +263,22 @@
 
   # Enable the OpenSSH daemon.
   services.openssh.enable = true;
+  services.gvfs.enable = true;
+  services.dbus.enable = true;
+  services.gnome.gnome-keyring.enable = true;
+  services.tumbler.enable = true;
+
+  xdg = {
+    portal = {
+      wlr.enable = true;
+      xdgOpenUsePortal = true;
+      extraPortals = [
+        pkgs.xdg-desktop-portal-hyprland
+        pkgs.xdg-desktop-portal-gtk
+      ];
+      config.common.default = "*";
+    };
+  };
 
   # Enable the polkit daemon
   security.polkit.enable = true;

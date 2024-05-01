@@ -23,6 +23,10 @@
       outputs.homeManagerModules.firefox
       outputs.homeManagerModules.vscode
       outputs.homeManagerModules.btop
+      outputs.homeManagerModules.dunst
+      outputs.homeManagerModules.gtk
+      outputs.homeManagerModules.hyprland
+      outputs.homeManagerModules.waybar
   ];
 
   nixpkgs = {

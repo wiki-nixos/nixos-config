@@ -10,5 +10,9 @@
   firefox = import ./firefox.nix;
   vscode = import ./vscode.nix;
   btop = import ./btop.nix;
+  dunst = import ./dunst.nix;
+  gtk = import ./gtk.nix;
+  hyprland = import ./hyprland.nix;
+  waybar = import ./waybar.nix;
 #  sway = import ./sway.nix;
 }

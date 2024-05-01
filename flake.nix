@@ -26,6 +26,9 @@
     # Firefox Addons
     firefox-addons.url = "gitlab:rycee/nur-expressions?dir=pkgs/firefox-addons";
 
+    # Hyprland
+    hyprland.url = "github:hyprwm/Hyprland";
+
     # TODO: Add any other flake you might need
     # hardware.url = "github:nixos/nixos-hardware";
 
@@ -43,6 +46,7 @@
     chaotic,
     nur,
     firefox-addons,
+    hyprland,
     ...
   } @ inputs: let
     inherit (self) outputs;
