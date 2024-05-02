@@ -135,6 +135,12 @@
    enable = true;
   };
 
+  # sddm
+  services.xserver.displayManager.sddm.enable = true;
+  services.xserver.displayManager.sddm.wayland.enable = true;
+  services.xserver.displayManager.sddm.theme = "where_is_my_sddm_theme";
+  services.xserver.displayManager.sessionPackages = [ pkgs.hyprland ];
+
   # Enable OpenGL
   hardware.opengl = {
     enable = true;
@@ -142,7 +148,7 @@
     driSupport32Bit = true;
   };
 
-   hardware.nvidia = {
+  hardware.nvidia = {
 
     # Modesetting is required.
     modesetting.enable = true;
