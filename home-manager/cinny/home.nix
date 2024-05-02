@@ -67,6 +67,7 @@
   # home.packages = with pkgs; [ steam ];
 
   home.packages = with pkgs; [ dconf ];
+  services.cliphist.enable = true;
 
   # Enable home-manager
   programs.home-manager.enable = true;

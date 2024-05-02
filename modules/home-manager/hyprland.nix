@@ -72,6 +72,12 @@
       "HDMI-1, 2560x1440@59.95, auto, 1"
     ];
 
+    env = [
+      "LIBVA_DRIVER_NAME,nvidia"
+      "XDG_SESSION_TYPE,wayland"
+      "WLR_NO_HARDWARE_CURSORS,1"
+    ];
+
     "$mod" = "SUPER";
     bind = [
       "$mod, W, exec, firefox"
@@ -79,6 +85,8 @@
         "$mod, Q, killactive"
         "$mod, V, togglefloating"
         "$mod, D, exec, rofi -show drun -config /etc/nixos/modules/home-manager/rofi/rofidmenu.rasi"
+        "$mod ALT, V, exec, /etc/nixos/modules/home-manager/scripts/clipboard.sh"
+        "$mod SHIFT, Q, exec, /etc/nixos/modules/home-manager/scripts/poweroff.sh"
         "$mod, P, pseudo"
         "$mod, J, togglesplit"
         "$mod, S, exec, grimblast --freeze copysave area"
@@ -117,6 +125,11 @@
     ];
 
     decoration = { };
+
+    misc = {
+      disable_splash_rendering = true;
+      disable_hyprland_logo = true;
+    };
 
     windowrulev2 = [
       "stayfocused, title:^()$,class:^(steam)$"

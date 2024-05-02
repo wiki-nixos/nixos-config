@@ -126,20 +126,31 @@
     LC_TIME = "en_AU.UTF-8";
   };
 
-  # Configure keymap in X11
+
   services.xserver = {
-  xkb = {
-    layout = "au";
-    variant = "";
-   };
-   enable = true;
+    enable = true;
+
+    videoDrivers = ["nvidia"];
+
+    # Configure keymap in X11
+    xkb = {
+      layout = "au";
+      variant = "";
+    };
+
+    excludePackages = with  pkgs; [ xterm ];
+
+    # Configure SDDM
+    displayManager.sddm = {
+      enable = true;
+      wayland.enable = true; # Enable Wayland support for SDDM
+      # theme = "sugar-candy"; # Uncomment this line if you want to set a theme
+    };
+
+    # Specify session packages for the display manager
+    displayManager.sessionPackages = [ pkgs.hyprland ];
   };
 
-  # sddm
-  services.xserver.displayManager.sddm.enable = true;
-  services.xserver.displayManager.sddm.wayland.enable = true;
-  services.xserver.displayManager.sddm.theme = "where_is_my_sddm_theme";
-  services.xserver.displayManager.sessionPackages = [ pkgs.hyprland ];
 
   # Enable OpenGL
   hardware.opengl = {
@@ -177,7 +188,7 @@
     nvidiaSettings = true;
 
     # Optionally, you may need to select the appropriate driver version for your specific GPU.
-    package = config.boot.kernelPackages.nvidiaPackages.latest;
+    package = config.boot.kernelPackages.nvidiaPackages.stable;
   };
 
   # Enable CUPS to print documents.
@@ -250,6 +261,8 @@
       grimblast
       wlogout
       blueman
+
+      fastfetch
     ];
   };
 
@@ -278,7 +291,7 @@
   services.dbus.enable = true;
   services.gnome.gnome-keyring.enable = true;
   services.tumbler.enable = true;
-
+  
   xdg = {
     portal = {
       wlr.enable = true;
