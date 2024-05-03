@@ -25,6 +25,7 @@
       outputs.homeManagerModules.btop
       outputs.homeManagerModules.dunst
       outputs.homeManagerModules.gtk
+      outputs.homeManagerModules.qt
       outputs.homeManagerModules.hyprland
       outputs.homeManagerModules.waybar
   ];

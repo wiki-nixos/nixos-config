@@ -12,6 +12,7 @@
   btop = import ./btop.nix;
   dunst = import ./dunst.nix;
   gtk = import ./gtk.nix;
+  qt = import ./qt.nix;
   hyprland = import ./hyprland.nix;
   waybar = import ./waybar.nix;
   zsh = import ./zsh.nix;
