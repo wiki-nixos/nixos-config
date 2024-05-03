@@ -8,7 +8,7 @@ services.dunst =
       monitor = 0;
       follow = "none";
       width = 300;
-      height = 300;
+      height = 200;
       origin = "top_right";
       offset = "10x50";
       scale = 0;
@@ -16,7 +16,7 @@ services.dunst =
       progress_bar = true;
       progress_bar_height = 10;
       progress_bar_frame_width = 1;
-      progress_bar_min_width = 150;
+      progress_bar_min_width = 300;
       progress_bar_max_width = 300;
       progress_bar_corner_radius = 0;
       icon_corner_radius = 0;
@@ -27,11 +27,11 @@ services.dunst =
       horizontal_padding = 9;
       text_icon_padding = 0;
       frame_width = 3;
-      frame_color = "#ff99e6";
+      frame_color = "#fff";
       gap_size = 0;
       separator_color = "frame";
       sort = "yes";
-      font = "Monospace 8";
+      font = "Jetbrains Mono 8";
       line_height = 0;
       markup = "full";
       format = "<b>%s</b>\\n%b";
@@ -68,22 +68,21 @@ services.dunst =
       per_monitor_dpi = false;
     };
     urgency_low = {
-      background = "#869ef4";
+      background = "#00000080"; 
       foreground = "#ffffff";
       timeout = 10;
     };
     urgency_normal = {
-      background = "#869ef4";
-      foreground = "#ffffff";
+      background = "#00000080"; 
+      foreground = "#ffffff"; 
       timeout = 10;
     };
     urgency_critical = {
-      background = "#900000";
+      background = "#96060680";
       foreground = "#ffffff";
-      frame_color = "#ff0000";
+      frame_color = "#ffffff";
       timeout = 0;
     };
-
   };
 
 };

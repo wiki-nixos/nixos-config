@@ -8,6 +8,8 @@
   settings = {
     exec-once = [
       "/etc/nixos/modules/home-manager/scripts/swwwchange.sh /etc/nixos/wallpapers"
+      "/etc/nixos/modules/home-manager/scripts/borders.sh"
+      #"swww init"
       "waybar"
       "dunst"
       "hyprctl setcursor Bibata-Modern-Classic 24"
@@ -26,7 +28,7 @@
       gaps_out = 0;
       border_size = 3;
       #"col.active_border" = "rgba(ff99e694) rgba(869ef4cf) 45deg";
-      "col.active_border" = "rgba(FF7F50FF) rgba(00FFFFFF) 45deg";
+      "col.active_border" = "rgba(FF7F50FF) rgba(00FFFFFF) 45deg"; # Fallback
       "col.inactive_border" = "rgba(595959aa)";
       layout = "dwindle";
     };
@@ -86,6 +88,7 @@
         "$mod, V, togglefloating"
         "$mod, D, exec, rofi -show drun -config /etc/nixos/modules/home-manager/rofi/rofidmenu.rasi"
         "$mod ALT, V, exec, /etc/nixos/modules/home-manager/scripts/clipboard.sh"
+        "$mod ALT, Q, exec, wlogout"
         "$mod SHIFT, Q, exec, /etc/nixos/modules/home-manager/scripts/poweroff.sh"
         "$mod, P, pseudo"
         "$mod, J, togglesplit"

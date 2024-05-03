@@ -261,6 +261,7 @@
       grimblast
       wlogout
       blueman
+      #openssl
 
       fastfetch
     ];
