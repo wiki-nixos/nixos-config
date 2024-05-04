@@ -20,6 +20,7 @@
       sysconf = "sudo nixos-rebuild switch --flake /etc/nixos#nixos-desktop";
       homeconf = "home-manager switch --flake /etc/nixos#eternal@nixos-desktop";
       jvim = "nix run --refresh github:quantumcoded/neovim";
+      code = "codium";
     };
 
     history.size = 10000;

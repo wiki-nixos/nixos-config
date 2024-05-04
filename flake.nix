@@ -95,6 +95,7 @@
           ./nixos/thinkpad/configuration.nix
           chaotic.nixosModules.default
           nur.nixosModules.nur
+          nixos-hardware.nixosModules.lenovo-thinkpad-x200s
         ];
       };
       "970-desktop" = nixpkgs.lib.nixosSystem {
@@ -104,6 +105,7 @@
           ./nixos/970-desktop/configuration.nix
           chaotic.nixosModules.default
           nur.nixosModules.nur
+          nixos-hardware.nixosModules.common-cpu-intel-sandy-bridge 
         ];
       };
     };

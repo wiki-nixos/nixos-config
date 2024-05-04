@@ -28,6 +28,9 @@
       outputs.homeManagerModules.qt
       outputs.homeManagerModules.hyprland
       outputs.homeManagerModules.waybar
+      outputs.homeManagerModules.wlogout
+      outputs.homeManagerModules.swaylock
+      outputs.homeManagerModules.swayidle
   ];
 
   nixpkgs = {

@@ -183,6 +183,12 @@
     # Currently alpha-quality/buggy, so false is currently the recommended setting.
     open = false;
 
+    prime = {
+      sync.enable = true;
+      intelBusId = "PCI:0:2:0";
+      nvidiaBusId = "PCI:1:0:0";
+    };
+
     # Enable the Nvidia settings menu,
 	# accessible via `nvidia-settings`.
     nvidiaSettings = true;
@@ -259,11 +265,13 @@
       pavucontrol
       xfce.thunar
       grimblast
-      wlogout
       blueman
+      swayidle
       #openssl
 
+      wmctrl
       fastfetch
+      transmission-gtk
     ];
   };
 
@@ -292,6 +300,7 @@
   services.dbus.enable = true;
   services.gnome.gnome-keyring.enable = true;
   services.tumbler.enable = true;
+  security.pam.services.swaylock = {};
   
   xdg = {
     portal = {

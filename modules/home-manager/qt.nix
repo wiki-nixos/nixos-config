@@ -1,7 +1,6 @@
 { config, lib, pkgs,... }:
 
 {
-  
   qt = {
     enable = true;
     platformTheme = "gtk";
@@ -10,5 +9,4 @@
       package = pkgs.adwaita-qt;
     };
   };
-
 }
