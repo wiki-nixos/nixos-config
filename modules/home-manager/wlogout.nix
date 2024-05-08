@@ -55,7 +55,7 @@ in {
       }
       {
         label = "logout";
-        action = "systemctl logout";
+        action = "pkill Hyprland";
         text = "Logout";
         keybind = "o";
       }

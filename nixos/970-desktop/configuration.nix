@@ -246,13 +246,8 @@
     shell = pkgs.zsh;
     packages = with pkgs; [
       lunarvim
-      spotify-player
-      obs-studio
-      gimp
-      vesktop
-      audacity
-      weechat
       font-awesome
+      vesktop
 
       waybar
       waypaper

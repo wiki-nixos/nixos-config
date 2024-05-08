@@ -7,8 +7,8 @@
 
   settings = {
     exec-once = [
-      "/etc/nixos/modules/home-manager/scripts/borders.sh"
       "/etc/nixos/modules/home-manager/scripts/swwwchange.sh /etc/nixos/wallpapers"
+      "/etc/nixos/modules/home-manager/scripts/borders.sh"
       "swayidle -w timeout 600 'swaylock'"
       "waybar"
       "dunst"
