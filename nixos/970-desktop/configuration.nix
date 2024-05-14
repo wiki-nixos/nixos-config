@@ -147,11 +147,10 @@
 
     excludePackages = with  pkgs; [ xterm ];
 
-    # Configure SDDM
     displayManager.sddm = {
       enable = true;
-      wayland.enable = true; # Enable Wayland support for SDDM
-      # theme = "sugar-candy"; # Uncomment this line if you want to set a theme
+      wayland.enable = true; 
+      theme = "${import ../../pkgs/sddm-theme.nix { inherit pkgs; }}"; 
     };
 
     # Specify session packages for the display manager
@@ -278,14 +277,14 @@
       grim
       blueman
       swayidle
-
     ];
   };
 
   # List packages installed in system profile. To search, run:
   # $ nix search wget
   environment.systemPackages = with pkgs; [
-    
+    libsForQt5.qt5.qtquickcontrols2   
+    libsForQt5.qt5.qtgraphicaleffects
   ];
 
   # Nerd font
