@@ -254,14 +254,14 @@
     packages = with pkgs; [
 
       # Main Apps
-      font-awesome
       vesktop
-      spotify-qt
-      librespot
       fastfetch
       transmission-gtk
       tgpt
       krabby
+      spotify-player
+      imv
+      mpv
 
       # Hyprland Dependancys
       waybar
@@ -270,7 +270,6 @@
       polkit_gnome
       rofi-wayland
       wl-clipboard
-      nwg-look
       pavucontrol
       xfce.thunar
       slurp
@@ -285,6 +284,7 @@
   environment.systemPackages = with pkgs; [
     libsForQt5.qt5.qtquickcontrols2   
     libsForQt5.qt5.qtgraphicaleffects
+    font-awesome
   ];
 
   # Nerd font
