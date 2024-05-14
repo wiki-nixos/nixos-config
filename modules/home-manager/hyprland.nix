@@ -79,13 +79,14 @@
 
     "$mod" = "SUPER";
     bind = [
-      "$mod, W, exec, firefox"
+        "$mod, W, exec, firefox"
+        "$mod, T, exec, thunar"
         "$mod, Return, exec, kitty"
         "$mod, Q, killactive"
         "$mod, V, togglefloating"
         "$mod, D, exec, rofi -show drun -config /etc/nixos/modules/home-manager/rofi/rofidmenu.rasi"
+        "$mod, H, exec,  /etc/nixos/modules/home-manager/scripts/keybinds.sh"
         "$mod ALT, V, exec, /etc/nixos/modules/home-manager/scripts/clipboard.sh"
-        "$mod ALT, Q, exec, wlogout"
         "$mod SHIFT, Q, exec, /etc/nixos/modules/home-manager/scripts/poweroff.sh"
         "$mod, P, pseudo"
         "$mod, J, togglesplit"

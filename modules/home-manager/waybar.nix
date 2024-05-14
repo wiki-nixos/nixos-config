@@ -10,7 +10,7 @@ programs.waybar =
     position = "top";
     modules-left = [ "hyprland/workspaces" "cpu" "disk" "memory" "temperature" "pulseaudio" "backlight" "battery#bat1" "battery#bat2" ];
     modules-center = [ "hyprland/window" ];
-    modules-right = [ "network" "custom/weather" "tray" "clock" "custom/poweroff" ];
+    modules-right = [ "network" "custom/weather" "tray" "clock" "custom/keybinds" "custom/poweroff" ];
     "hyprland/workspaces" = {
       format = "{icon}";
       on-click = "activate";
@@ -159,6 +159,10 @@ programs.waybar =
     "custom/poweroff" = { 
       format = ""; 
       on-click = "sh /etc/nixos/modules/home-manager/scripts/poweroff.sh"; 
+    };
+    "custom/keybinds" = {
+      format = "";
+      on-click = "sh /etc/nixos/modules/home-manager/scripts/keybinds.sh";
     };
   }];
 
