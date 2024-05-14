@@ -19,4 +19,6 @@
   wlogout = import ./wlogout.nix;
   swaylock = import ./swaylock.nix;
   swayidle = import ./swayidle.nix;
+  swappy = import ./swappy.nix;
+  lunarvim = import ./lunarvim.nix;
 }

@@ -8,7 +8,7 @@
   settings = {
     exec-once = [
       "/etc/nixos/modules/home-manager/scripts/swwwchange.sh /etc/nixos/wallpapers"
-      "/etc/nixos/modules/home-manager/scripts/borders.sh"
+      #"/etc/nixos/modules/home-manager/scripts/borders.sh"
       "swayidle -w timeout 600 'swaylock'"
       "waybar"
       "dunst"
@@ -22,13 +22,10 @@
     };
 
     general = {
-      #gaps_in = 5;
-      gaps_in = 0;
-      #gaps_out = 10;
-      gaps_out = 0;
+      gaps_in = 5;
+      gaps_out = 10;
       border_size = 3;
-      #"col.active_border" = "rgba(ff99e694) rgba(869ef4cf) 45deg";
-      "col.active_border" = "rgba(FF7F50FF) rgba(00FFFFFF) 45deg"; # Fallback
+      "col.active_border" = "rgba(FFFFFFFF) rgba(FFFFFFFF) 45deg"; 
       "col.inactive_border" = "rgba(595959aa)";
       layout = "dwindle";
     };
@@ -92,7 +89,7 @@
         "$mod SHIFT, Q, exec, /etc/nixos/modules/home-manager/scripts/poweroff.sh"
         "$mod, P, pseudo"
         "$mod, J, togglesplit"
-        "$mod, S, exec, grimblast --freeze copysave area"
+        "$mod, S, exec, /etc/nixos/modules/home-manager/scripts/screenshot.sh"
         "$mod, F, fullscreen"
         "$mod, left, movefocus, l"
         "$mod, right, movefocus, r"

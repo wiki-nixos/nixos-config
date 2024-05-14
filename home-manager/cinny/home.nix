@@ -21,7 +21,7 @@
       outputs.homeManagerModules.kitty
       outputs.homeManagerModules.zsh
       outputs.homeManagerModules.firefox
-      outputs.homeManagerModules.vscode
+#      outputs.homeManagerModules.vscode
       outputs.homeManagerModules.btop
       outputs.homeManagerModules.dunst
       outputs.homeManagerModules.gtk
@@ -31,6 +31,8 @@
       outputs.homeManagerModules.wlogout
       outputs.homeManagerModules.swaylock
       outputs.homeManagerModules.swayidle
+      outputs.homeManagerModules.swappy
+      outputs.homeManagerModules.lunarvim
   ];
 
   nixpkgs = {

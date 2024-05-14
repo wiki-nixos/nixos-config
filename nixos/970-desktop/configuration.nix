@@ -26,16 +26,29 @@
   ];
 
   nixpkgs = {
+    # Configure your nixpkgs instance
+    config = {
+      allowUnfree = true; # Allow unfree packages
+      nvidia.acceptLicense = true; # Accept Nvidia license
+      
+      # Override packages with NUR repository
+      packageOverrides = pkgs: {
+        nur = import (builtins.fetchTarball "https://github.com/nix-community/NUR/archive/master.tar.gz") {
+          inherit pkgs;
+        };
+      };
+    };
+    
     # You can add overlays here
     overlays = [
       # Add overlays your own flake exports (from overlays and pkgs dir):
       outputs.overlays.additions
       outputs.overlays.modifications
       outputs.overlays.unstable-packages
-
+      
       # You can also add overlays exported from other flakes:
       # neovim-nightly-overlay.overlays.default
-
+      
       # Or define it inline, for example:
       # (final: prev: {
       #   hi = final.hello.overrideAttrs (oldAttrs: {
@@ -43,13 +56,7 @@
       #   });
       # })
     ];
-    # Configure your nixpkgs instance
-    config = {
-      # Disable if you don't want unfree packages
-      allowUnfree = true;
-      nvidia.acceptLicense = true;
-    };
-  }; 
+  };
 
   # This will add each flake input as a registry
   # To make nix3 commands consistent with your flake
@@ -187,10 +194,10 @@
       sync.enable = true;
       intelBusId = "PCI:0:2:0";
       nvidiaBusId = "PCI:1:0:0";
-    };
+    }; 
 
     # Enable the Nvidia settings menu,
-	# accessible via `nvidia-settings`.
+	  # accessible via `nvidia-settings`.
     nvidiaSettings = true;
 
     # Optionally, you may need to select the appropriate driver version for your specific GPU.
@@ -228,6 +235,7 @@
   # Dconf for home-manager
   programs.dconf.enable = true;
 
+ # Uncomment if using fish
  # programs.bash = {
  # interactiveShellInit = ''
  #   if [[ $(${pkgs.procps}/bin/ps --no-header --pid=$PPID --format=comm) != "fish" && -z ''${BASH_EXECUTION_STRING} ]]
@@ -245,12 +253,19 @@
     extraGroups = [ "networkmanager" "wheel" "audio" ];
     shell = pkgs.zsh;
     packages = with pkgs; [
-      lunarvim
+
+      # Main Apps
       font-awesome
       vesktop
+      spotify-qt
+      librespot
+      fastfetch
+      transmission-gtk
+      tgpt
+      krabby
 
+      # Hyprland Dependancys
       waybar
-      waypaper
       swww
       bibata-cursors
       polkit_gnome
@@ -259,22 +274,21 @@
       nwg-look
       pavucontrol
       xfce.thunar
-      grimblast
+      slurp
+      grim
       blueman
       swayidle
-      #openssl
 
-      wmctrl
-      fastfetch
-      transmission-gtk
     ];
   };
 
   # List packages installed in system profile. To search, run:
   # $ nix search wget
   environment.systemPackages = with pkgs; [
+    
   ];
 
+  # Nerd font
   fonts.packages = with pkgs; [
     (nerdfonts.override { fonts = [ "FiraCode" ]; })
   ];
@@ -291,12 +305,20 @@
 
   # Enable the OpenSSH daemon.
   services.openssh.enable = true;
+
+  # GVFS For mounting other drives
   services.gvfs.enable = true;
+
+  # Session Management
   services.dbus.enable = true;
+
+  # Security
   services.gnome.gnome-keyring.enable = true;
   services.tumbler.enable = true;
   security.pam.services.swaylock = {};
+  security.polkit.enable = true;
   
+  # XDG Portal
   xdg = {
     portal = {
       wlr.enable = true;
@@ -308,9 +330,6 @@
       config.common.default = "*";
     };
   };
-
-  # Enable the polkit daemon
-  security.polkit.enable = true;
 
   # Open ports in the firewall.
   # networking.firewall.allowedTCPPorts = [ ... ];

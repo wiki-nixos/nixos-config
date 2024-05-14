@@ -14,14 +14,14 @@
       
       effect-blur = "7x5";
       effect-vignette = "0.5:0.5";
-      effect-pixelate = 5;
+      #effect-pixelate = 5;
       
       color="ffffff";
       bs-hl-color="f5e0dc";
       key-hl-color="a6e3a1";
       caps-lock-bs-hl-color="f5e0dc";
       caps-lock-key-hl-color="a6e3a1";
-      ring-color="b4befe";
+      ring-color="ffffff";
       ring-clear-color="f5e0dc";
       ring-caps-lock-color="fab387";
       ring-ver-color="89b4fa";
