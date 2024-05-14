@@ -13,7 +13,7 @@
       indicator-thickness = 7;
       
       effect-blur = "7x5";
-      effect-vignette = "0.5:0.5";
+      effect-vignette = "1:1";
       #effect-pixelate = 5;
       
       color="ffffff";
