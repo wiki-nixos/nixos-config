@@ -24,6 +24,8 @@
       jvim = "nix run --refresh github:quantumcoded/neovim";
       code = "codium";
       stopwatch = "now=$(date +%s)sec; watch -n0.1 -p TZ=UTC date --date now-$now +%H:%M:%S.%N";
+      transmission = "transmission-cli";
+      mount-samba = "/etc/nixos/modules/home-manager/scripts/mount_samba.sh";
     };
 
     history.size = 10000;

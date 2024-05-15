@@ -254,11 +254,15 @@
     packages = with pkgs; [
 
       # Main Apps
-      vesktop
+      vesktop 
+      samba
       fastfetch
-      transmission-gtk
+      transmission#-gtk
       tgpt
       krabby
+      pavucontrol
+      xfce.thunar
+      blueman
       spotify-player
       imv
       mpv
@@ -269,12 +273,9 @@
       bibata-cursors
       polkit_gnome
       rofi-wayland
-      wl-clipboard
-      pavucontrol
-      xfce.thunar
+      wl-clipboard 
       slurp
       grim
-      blueman
       swayidle
       jq
       yad

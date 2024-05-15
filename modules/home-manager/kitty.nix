@@ -6,7 +6,7 @@
     #theme = "Catppuccin-Mocha";
     # Adjustments for font configuration according to the NixOS options
     font = {
-      name = "Fira Code";
+      name = "Jetbrains Mono";
       # Adding font size as it's commonly needed, adjust as necessary
       size = 13;
     };
