@@ -33,6 +33,7 @@
       outputs.homeManagerModules.swayidle
       outputs.homeManagerModules.swappy
       outputs.homeManagerModules.lunarvim
+      outputs.homeManagerModules.cmus
   ];
 
   nixpkgs = {

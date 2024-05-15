@@ -4,4 +4,5 @@
 {pkgs, ...}: {
   # example = pkgs.callPackage ./example { };
   sddm-theme = pkgs.callPackage ./sddm-theme.nix { };
+  cmus-notify = pkgs.callPackage ./cmus-notify.nix { };
 }

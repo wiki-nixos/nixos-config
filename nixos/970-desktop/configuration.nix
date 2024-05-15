@@ -266,8 +266,9 @@
       spotify-player
       imv
       mpv
+      cmus-notify
 
-      # Hyprland Dependancys
+    # Hyprland Dependancys
       waybar
       swww
       bibata-cursors
@@ -279,6 +280,7 @@
       swayidle
       jq
       yad
+      activate-linux
     ];
   };
 
@@ -288,12 +290,24 @@
     libsForQt5.qt5.qtquickcontrols2   
     libsForQt5.qt5.qtgraphicaleffects
     font-awesome
+    cifs-utils
   ];
 
   # Nerd font
   fonts.packages = with pkgs; [
     (nerdfonts.override { fonts = [ "FiraCode" ]; })
   ];
+
+  # For mount.cifs, required unless domain name resolution is not needed.
+  fileSystems."/mnt/samba_share" = {
+    device = "//192.168.50.52/samba-share";
+    fsType = "cifs";
+    options = let
+      # this line prevents hanging on network split
+      automount_opts = "x-systemd.automount,noauto,x-systemd.idle-timeout=60,x-systemd.device-timeout=5s,x-systemd.mount-timeout=5s";
+
+    in ["${automount_opts},credentials=/etc/nixos/secrets/smb-secrets"];
+  };
 
   # Some programs need SUID wrappers, can be configured further or are
   # started in user sessions.

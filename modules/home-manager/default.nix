@@ -21,4 +21,5 @@
   swayidle = import ./swayidle.nix;
   swappy = import ./swappy.nix;
   lunarvim = import ./lunarvim.nix;
+  cmus = import ./cmus.nix;
 }
