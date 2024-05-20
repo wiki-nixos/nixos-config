@@ -283,6 +283,7 @@
       jq
       yad
       activate-linux
+      waypaper
     ];
   };
 
