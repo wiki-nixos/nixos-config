@@ -249,7 +249,7 @@
   users.users.cinny = {
     isNormalUser = true;
     description = "cinny";
-    extraGroups = [ "networkmanager" "wheel" "audio" ];
+    extraGroups = [ "networkmanager" "wheel" "audio" "video" "plugdev" "cdrom" ];
     shell = pkgs.zsh;
     packages = with pkgs; [
 
@@ -267,6 +267,8 @@
       imv
       mpv
       cmus-notify
+      birch
+ 
 
     # Hyprland Dependancys
       waybar
@@ -307,6 +309,22 @@
       automount_opts = "x-systemd.automount,noauto,x-systemd.idle-timeout=60,x-systemd.device-timeout=5s,x-systemd.mount-timeout=5s";
 
     in ["${automount_opts},credentials=/etc/nixos/secrets/smb-secrets"];
+  };
+
+  systemd = {
+  user.services.polkit-gnome-authentication-agent-1 = {
+    description = "polkit-gnome-authentication-agent-1";
+    wantedBy = [ "graphical-session.target" ];
+    wants = [ "graphical-session.target" ];
+    after = [ "graphical-session.target" ];
+    serviceConfig = {
+        Type = "simple";
+        ExecStart = "${pkgs.polkit_gnome}/libexec/polkit-gnome-authentication-agent-1";
+        Restart = "on-failure";
+        RestartSec = 1;
+        TimeoutStopSec = 10;
+      };
+    };
   };
 
   # Some programs need SUID wrappers, can be configured further or are

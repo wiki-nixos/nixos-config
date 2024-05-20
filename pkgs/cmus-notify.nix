@@ -4,9 +4,9 @@ rustPlatform.buildRustPackage rec {
   pname = "cmus-notify";
   version = "1.0.0"; 
   src = fetchFromGitHub {
-    owner = "EternalBlissed";
+    owner = "mathieu-lemay";
     repo = "cmus-notify";
-    rev = "3f41f4724961006d479ac1776342ca028eda3819";
+    rev = "master";
     sha256 = "sha256-W1UWiWVLHqPqysrDuPig0kBGbZjHcPVcYdJHY2HJUHg=";
     };
 

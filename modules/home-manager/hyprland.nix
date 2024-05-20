@@ -14,7 +14,6 @@
       "dunst"
       "hyprctl setcursor Bibata-Modern-Classic 24"
       "systemctl --user import-environment PATH && systemctl --user restart xdg-desktop-portal.service"
-      "/usr/lib/polkit-gnome/polkit-gnome-authentication-agent-1"
       "activate-linux --text-title 'Activate NixOS' --text-message 'Go to /etc/nixos to activate NixOS' --text-font 'Fira Code'"
     ];
 
