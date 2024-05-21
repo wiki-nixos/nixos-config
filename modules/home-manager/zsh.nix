@@ -8,6 +8,7 @@
     syntaxHighlighting.enable = true;    
     initExtra = "
     krabby random -s --no-title
+    wallust run --quiet /etc/nixos/wallpapers/2.jpg
     ";
 
     oh-my-zsh = {
@@ -26,7 +27,6 @@
       stopwatch = "now=$(date +%s)sec; watch -n0.1 -p TZ=UTC date --date now-$now +%H:%M:%S.%N";
       transmission = "transmission-cli";
       mount-samba = "/etc/nixos/modules/home-manager/scripts/mount_samba.sh";
-      ncmpcpp = "/etc/nixos/modules/home-manager/scripts/ncmpcpp-ueberzug.sh";
     };
 
     history.size = 10000;

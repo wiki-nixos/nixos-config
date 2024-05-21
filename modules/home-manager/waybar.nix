@@ -161,7 +161,7 @@ programs.waybar =
       on-click = "sh /etc/nixos/modules/home-manager/scripts/poweroff.sh"; 
     };
     "custom/keybinds" = {
-      format = "";
+      format = " ";
       on-click = "sh /etc/nixos/modules/home-manager/scripts/keybinds.sh";
     };
   }];

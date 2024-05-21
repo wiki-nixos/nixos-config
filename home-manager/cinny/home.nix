@@ -5,8 +5,10 @@
   config,
   pkgs,
   nur,
+  nix-colors,
   ...
-}: {
+}:
+{
   # You can import other home-manager modules here
   imports = [
     # If you want to use modules your own flake exports (from modules/home-manager):
@@ -21,7 +23,6 @@
       outputs.homeManagerModules.kitty
       outputs.homeManagerModules.zsh
       outputs.homeManagerModules.firefox
-#      outputs.homeManagerModules.vscode
       outputs.homeManagerModules.btop
       outputs.homeManagerModules.dunst
       outputs.homeManagerModules.gtk
@@ -34,6 +35,8 @@
       outputs.homeManagerModules.swappy
       outputs.homeManagerModules.lunarvim
       outputs.homeManagerModules.cmus
+      
+      inputs.nix-colors.homeManagerModules.default
   ];
 
   nixpkgs = {
