@@ -5,7 +5,6 @@
   config,
   pkgs,
   nur,
-  nix-colors,
   ...
 }:
 {
@@ -35,8 +34,6 @@
       outputs.homeManagerModules.swappy
       outputs.homeManagerModules.lunarvim
       outputs.homeManagerModules.cmus
-      
-      inputs.nix-colors.homeManagerModules.default
   ];
 
   nixpkgs = {

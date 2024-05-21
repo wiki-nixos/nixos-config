@@ -8,7 +8,6 @@
     syntaxHighlighting.enable = true;    
     initExtra = "
     krabby random -s --no-title
-    wallust run --quiet /etc/nixos/wallpapers/2.jpg
     ";
 
     oh-my-zsh = {

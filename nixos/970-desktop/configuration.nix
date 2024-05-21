@@ -284,7 +284,6 @@
       yad
       activate-linux
       waypaper
-      wallust
     ];
   };
 

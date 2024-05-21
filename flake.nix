@@ -29,8 +29,6 @@
     # Hyprland
     hyprland.url = "github:hyprwm/Hyprland";
 
-    # Nix Colors
-    nix-colors.url = "github:misterio77/nix-colors";
   };
 
   outputs = {
@@ -43,7 +41,6 @@
     nur,
     firefox-addons,
     hyprland,
-    nix-colors,
     ...
   } @ inputs: let
     inherit (self) outputs;
@@ -74,27 +71,6 @@
     # NixOS configuration entrypoint
     # Available through 'nixos-rebuild --flake .#your-hostname'
     nixosConfigurations = {
-      # Dell XPS
-      dell-xps = nixpkgs.lib.nixosSystem {
-        specialArgs = {inherit inputs outputs;};
-        modules = [
-          # > Our main nixos configuration file <
-          ./nixos/dell-xps/configuration.nix
-	        nixos-hardware.nixosModules.dell-xps-13-9360
-          chaotic.nixosModules.default
-          nur.nixosModules.nur
-        ];
-      };
-      thinkpad = nixpkgs.lib.nixosSystem {
-        specialArgs = {inherit inputs outputs;};
-        modules = [
-          # > Our main nixos configuration file <
-          ./nixos/thinkpad/configuration.nix
-          chaotic.nixosModules.default
-          nur.nixosModules.nur
-          nixos-hardware.nixosModules.lenovo-thinkpad-x200s
-        ];
-      };
       "970-desktop" = nixpkgs.lib.nixosSystem {
         specialArgs = {inherit inputs outputs;};
         modules = [
@@ -110,24 +86,6 @@
     # Standalone home-manager configuration entrypoint
     # Available through 'home-manager --flake .#your-username@your-hostname'
     homeConfigurations = {
-      # Dell XPS for eternal Home Manager
-      "eternal@dell-xps" = home-manager.lib.homeManagerConfiguration {
-        pkgs = nixpkgs.legacyPackages.x86_64-linux; # Home-manager requires 'pkgs' instance
-        extraSpecialArgs = {inherit inputs outputs nixpkgs;};
-        modules = [
-          # > Our main home-manager configuration file <
-          ./home-manager/eternal/home.nix
-        ];
-      };
-      # Thinkpad for x200 Home Manager
-      "x200@thinkpad" = home-manager.lib.homeManagerConfiguration {
-        pkgs = nixpkgs.legacyPackages.x86_64-linux; # Home-manager requires 'pkgs' instance
-        extraSpecialArgs = {inherit inputs outputs nixpkgs;};
-        modules = [
-          # > Our main home-manager configuration file <
-          ./home-manager/x200/home.nix
-        ];
-      };
       # 970-Desktop for cinny Home Manager
       "cinny@970-desktop" = home-manager.lib.homeManagerConfiguration {
         pkgs = nixpkgs.legacyPackages.x86_64-linux; # Home-manager requires 'pkgs' instance
