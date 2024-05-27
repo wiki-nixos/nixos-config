@@ -6,7 +6,7 @@
 
       profiles.default = {
         extensions =
-        with inputs.firefox-addons.packages."x86_64-linux"; # ROUGH AS FUCK IMPLEMENTATION
+        with inputs.firefox-addons.packages."x86_64-linux";
           [
             darkreader
             firefox-color

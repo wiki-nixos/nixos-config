@@ -29,6 +29,9 @@
     # Hyprland
     hyprland.url = "github:hyprwm/Hyprland";
 
+    # Custom Nixvim Url
+    nixvim.url = "github:eternalblissed/nixvim";
+
   };
 
   outputs = {

@@ -1,5 +1,3 @@
-#!/bin/bash
-
 # Get the city name from location information
 city=$(curl -s https://ipinfo.io/city)
 

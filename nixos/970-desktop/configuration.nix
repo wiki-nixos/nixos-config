@@ -6,6 +6,7 @@
   lib,
   config,
   pkgs,
+  nixvim,
   ...
 }: {
   # You can import other NixOS modules here
@@ -268,7 +269,7 @@
       mpv
       cmus-notify
       birch
- 
+      inputs.nixvim.packages."x86_64-linux".default # Custom Nixvim Distro
 
     # Hyprland Dependancys
       waybar

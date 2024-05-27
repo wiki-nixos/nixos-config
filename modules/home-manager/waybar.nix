@@ -137,17 +137,17 @@ programs.waybar =
       pulseaudio = {
         scroll-step = 1;
         format = "{icon} {volume}%{format_source}";
-        format-bluetooth = "{icon} {volume}%{format_source}";
-        format-bluetooth-muted = " {icon}{format_source}";
+        format-bluetooth = "{icon}  {volume}%{format_source}";
+        format-bluetooth-muted = " {icon}  {format_source}";
         format-muted = "  {format_source}";
         format-source = "  {volume}%";
         format-source-muted = " ";
         format-icons = {
-        headphone = "";
-        phone = "";
-        portable = "";
-        car = "";
-        default = [ "" "" "" ];
+        headphone = " ";
+        phone = " ";
+        portable = " ";
+        car = " ";
+        default = [ "" "" " " ];
         };
         on-click = "pavucontrol";
     };

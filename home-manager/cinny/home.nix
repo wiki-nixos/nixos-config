@@ -7,7 +7,10 @@
   nur,
   ...
 }:
-{
+let
+  # Import the scripts from the specified path
+  scripts = builtins.attrValues (import ../../modules/home-manager/scripts.nix { inherit pkgs; });
+in {
   # You can import other home-manager modules here
   imports = [
     # If you want to use modules your own flake exports (from modules/home-manager):
@@ -18,22 +21,22 @@
 
     # You can also split up your configuration and import pieces of it here:
     # ./nvim.nix
-      outputs.homeManagerModules.git
-      outputs.homeManagerModules.kitty
-      outputs.homeManagerModules.zsh
-      outputs.homeManagerModules.firefox
-      outputs.homeManagerModules.btop
-      outputs.homeManagerModules.dunst
-      outputs.homeManagerModules.gtk
-      outputs.homeManagerModules.qt
-      outputs.homeManagerModules.hyprland
-      outputs.homeManagerModules.waybar
-      outputs.homeManagerModules.wlogout
-      outputs.homeManagerModules.swaylock
-      outputs.homeManagerModules.swayidle
-      outputs.homeManagerModules.swappy
-      outputs.homeManagerModules.lunarvim
-      outputs.homeManagerModules.cmus
+    outputs.homeManagerModules.git
+    outputs.homeManagerModules.kitty
+    outputs.homeManagerModules.zsh
+    outputs.homeManagerModules.firefox
+    outputs.homeManagerModules.btop
+    outputs.homeManagerModules.dunst
+    outputs.homeManagerModules.gtk
+    outputs.homeManagerModules.qt
+    outputs.homeManagerModules.hyprland
+    outputs.homeManagerModules.waybar
+    outputs.homeManagerModules.wlogout
+    outputs.homeManagerModules.swaylock
+    outputs.homeManagerModules.swayidle
+    outputs.homeManagerModules.swappy
+    outputs.homeManagerModules.lunarvim
+    outputs.homeManagerModules.cmus
   ];
 
   nixpkgs = {
@@ -69,11 +72,10 @@
     homeDirectory = "/home/cinny";
   };
 
-  # Add stuff for your user as you see fit:
-  # programs.neovim.enable = true;
-  # home.packages = with pkgs; [ steam ];
+  home.packages = with pkgs; [
+    dconf
+  ] ++ scripts;
 
-  home.packages = with pkgs; [ dconf ];
   services.cliphist.enable = true;
 
   # Enable home-manager
