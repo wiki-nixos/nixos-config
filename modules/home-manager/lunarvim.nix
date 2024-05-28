@@ -1,6 +1,4 @@
-{ pkgs, ... }:
-
-{
+{pkgs, ...}: {
   home.packages = with pkgs; [
     lunarvim
     # Install Missing Packages
@@ -11,4 +9,3 @@
 
   home.file.".config/lvim/config.lua".text = builtins.readFile ./lvim/config.lua;
 }
-

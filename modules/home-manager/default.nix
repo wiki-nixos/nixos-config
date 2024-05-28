@@ -4,8 +4,7 @@
   # List your module files here
   # my-module = import ./my-module.nix;
   git = import ./git.nix;
-  kitty = import ./kitty.nix; 
-  fish = import ./fish.nix;
+  kitty = import ./kitty.nix;
   neovim = import ./neovim.nix;
   firefox = import ./firefox.nix;
   vscode = import ./vscode.nix;

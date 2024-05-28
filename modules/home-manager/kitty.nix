@@ -1,12 +1,15 @@
-{ config, lib, pkgs, ... }:
-
 {
+  config,
+  lib,
+  pkgs,
+  ...
+}: {
   programs.kitty = {
     enable = true;
     #theme = "Catppuccin-Mocha";
     # Adjustments for font configuration according to the NixOS options
     font = {
-      name = "Jetbrains Mono";
+      name = "Fira Code";
       # Adding font size as it's commonly needed, adjust as necessary
       size = 13;
     };
@@ -14,8 +17,8 @@
       scrollback_lines = 10000;
       enable_audio_bell = false;
       confirm_os_window_close = 0;
-      background_opacity = "0.7";    
-  
+      background_opacity = "0.8";
+
       # tab bar settings
       tab_bar_edge = "bottom";
       tab_bar_style = "powerline";

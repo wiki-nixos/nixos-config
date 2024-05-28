@@ -1,15 +1,15 @@
 {
- pkgs,
- lib,
- ...
+  pkgs,
+  lib,
+  ...
 }: let
- bgImageSection = name: ''
+  bgImageSection = name: ''
     #${name} {
       background-image: image(url("${pkgs.wlogout}/share/wlogout/icons/${name}.png"));
     }
- '';
+  '';
 in {
- programs.wlogout = {
+  programs.wlogout = {
     enable = true;
 
     style = ''
@@ -84,5 +84,5 @@ in {
         keybind = "r";
       }
     ];
- };
+  };
 }

@@ -6,10 +6,9 @@
   pkgs,
   nur,
   ...
-}:
-let
+}: let
   # Import the scripts from the specified path
-  scripts = builtins.attrValues (import ../../modules/home-manager/scripts.nix { inherit pkgs; });
+  scripts = builtins.attrValues (import ../../modules/home-manager/scripts.nix {inherit pkgs;});
 in {
   # You can import other home-manager modules here
   imports = [
@@ -35,7 +34,6 @@ in {
     outputs.homeManagerModules.swaylock
     outputs.homeManagerModules.swayidle
     outputs.homeManagerModules.swappy
-    outputs.homeManagerModules.lunarvim
     outputs.homeManagerModules.cmus
   ];
 
@@ -72,9 +70,11 @@ in {
     homeDirectory = "/home/cinny";
   };
 
-  home.packages = with pkgs; [
-    dconf
-  ] ++ scripts;
+  home.packages = with pkgs;
+    [
+      dconf
+    ]
+    ++ scripts;
 
   services.cliphist.enable = true;
 

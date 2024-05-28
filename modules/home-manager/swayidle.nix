@@ -1,6 +1,8 @@
-{ config, pkgs,... }:
-
 {
+  config,
+  pkgs,
+  ...
+}: {
   services.swayidle = {
     enable = true;
     package = pkgs.swayidle;
@@ -22,4 +24,3 @@
     ];
   };
 }
-

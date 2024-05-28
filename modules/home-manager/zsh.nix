@@ -1,11 +1,14 @@
-{ config, lib, pkgs, ... }:
-
 {
+  config,
+  lib,
+  pkgs,
+  ...
+}: {
   programs.zsh = {
     enable = true;
     enableCompletion = true;
     enableAutosuggestions = true;
-    syntaxHighlighting.enable = true;    
+    syntaxHighlighting.enable = true;
     initExtra = "
     krabby random -s --no-title
     ";
@@ -14,7 +17,7 @@
       enable = true;
       #custom = ohMyZshCustom.outPath; # Use .outPath to ensure a string path is used
       theme = "agnoster";
-      plugins = [ "git" ];
+      plugins = ["git"];
     };
 
     shellAliases = {
@@ -32,4 +35,3 @@
     history.path = "${config.xdg.dataHome}/zsh/history";
   };
 }
-

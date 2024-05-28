@@ -9,29 +9,24 @@
   nixvim,
   ...
 }: {
-  # You can import other NixOS modules here
   imports = [
-    # If you want to use modules your own flake exports (from modules/nixos):
-    # outputs.nixosModules.example
-
-    # Or modules from other flakes (such as nixos-hardware):
-    # inputs.hardware.nixosModules.common-cpu-amd
-    # inputs.hardware.nixosModules.common-ssd
-
-    # You can also split up your configuration and import pieces of it here:
-    # ./users.nix
-
-    # Import your generated (nixos-generate-config) hardware configuration
     ./hardware-configuration.nix
     outputs.nixosModules.plymouth
+    inputs.home-manager.nixosModules.home-manager
   ];
 
+  home-manager = {
+    extraSpecialArgs = {inherit inputs outputs;};
+    users = {
+      cinny = import ../../home-manager/cinny/home.nix;
+    };
+  };
+
   nixpkgs = {
-    # Configure your nixpkgs instance
     config = {
       allowUnfree = true; # Allow unfree packages
       nvidia.acceptLicense = true; # Accept Nvidia license
-      
+
       # Override packages with NUR repository
       packageOverrides = pkgs: {
         nur = import (builtins.fetchTarball "https://github.com/nix-community/NUR/archive/master.tar.gz") {
@@ -39,33 +34,14 @@
         };
       };
     };
-    
-    # You can add overlays here
+
     overlays = [
-      # Add overlays your own flake exports (from overlays and pkgs dir):
       outputs.overlays.additions
       outputs.overlays.modifications
       outputs.overlays.unstable-packages
-      
-      # You can also add overlays exported from other flakes:
-      # neovim-nightly-overlay.overlays.default
-      
-      # Or define it inline, for example:
-      # (final: prev: {
-      #   hi = final.hello.overrideAttrs (oldAttrs: {
-      #     patches = [ ./change-hello-to-hi.patch ];
-      #   });
-      # })
     ];
   };
 
-  # This will add each flake input as a registry
-  # To make nix3 commands consistent with your flake
-  nix.registry = (lib.mapAttrs (_: flake: {inherit flake;})) ((lib.filterAttrs (_: lib.isType "flake")) inputs);
-
-  # This will additionally add your inputs to the system's legacy channels
-  # Making legacy nix commands consistent as well, awesome!
-  nix.nixPath = ["/etc/nix/path"];
   environment.etc =
     lib.mapAttrs'
     (name: value: {
@@ -74,47 +50,46 @@
     })
     config.nix.registry;
 
-  nix.settings = {
-    # Enable flakes and new 'nix' command
-    experimental-features = "nix-command flakes";
-    # Deduplicate and optimize nix store
-    auto-optimise-store = true;
-  };
+  nix = {
+    # Add each flake input as a registry to make nix3 commands consistent with your flake
+    registry = (lib.mapAttrs (_: flake: {inherit flake;})) ((lib.filterAttrs (_: lib.isType "flake")) inputs);
 
-  nix.gc = {
-    automatic = true;
-    dates = "weekly";
-    options = "--delete-older-than 7d";
-  };
-
-  # Bootloader.
-  boot.loader = {
-    efi = {
-      canTouchEfiVariables = true;
-      efiSysMountPoint = "/boot";
+    # Add your inputs to the system's legacy channels, making legacy nix commands consistent as well
+    nixPath = ["/etc/nix/path"];
+    settings = {
+      # Enable flakes and new 'nix' command
+      experimental-features = "nix-command flakes";
+      # Deduplicate and optimize nix store
+      auto-optimise-store = true;
     };
-    grub = {
-      efiSupport = true;
-      # Uncomment the following line if canTouchEfiVariables doesn't work for your system
-      # efiInstallAsRemovable = true;
-      device = "nodev";
-      #theme  = grub/src/catppuccin-mocha-grub-theme;
-      #splashImage = null;
+
+    gc = {
+      automatic = true;
+      dates = "weekly";
+      options = "--delete-older-than 7d";
     };
   };
 
-  # Use the Xanmod Kernel
-  boot.kernelPackages = pkgs.linuxPackages_xanmod;
+  # Bootloader
+  boot = {
+    loader = {
+      efi = {
+        canTouchEfiVariables = true;
+        efiSysMountPoint = "/boot";
+      };
+      grub = {
+        efiSupport = true;
+        device = "nodev";
+      };
+    };
+    kernelPackages = pkgs.linuxPackages_zen;
+  };
 
-  networking.hostName = "970-desktop"; # Define your hostname.
-  # networking.wireless.enable = true;  # Enables wireless support via wpa_supplicant.
-
-  # Configure network proxy if necessary
-  # networking.proxy.default = "http://user:password@proxy:port/";
-  # networking.proxy.noProxy = "127.0.0.1,localhost,internal.domain";
-
-  # Enable networking
-  networking.networkmanager.enable = true;
+  # Configure NM and Hostname
+  networking = {
+    hostName = "970-desktop";
+    networkmanager.enable = true;
+  };
 
   # Set your time zone.
   time.timeZone = "Australia/Sydney";
@@ -134,30 +109,32 @@
     LC_TIME = "en_AU.UTF-8";
   };
 
-
+  # Configure X / Wayland
   services.xserver = {
     enable = true;
 
+    # Use the Novideo driver
     videoDrivers = ["nvidia"];
 
-    # Configure keymap in X11
+    # Configure keymap
     xkb = {
       layout = "au";
       variant = "";
     };
 
-    excludePackages = with  pkgs; [ xterm ];
+    # Exclude Xterm
+    excludePackages = with pkgs; [xterm];
 
+    # Configure SDDM with custom theme.
     displayManager.sddm = {
       enable = true;
-      wayland.enable = true; 
-      theme = "${import ../../pkgs/sddm-theme.nix { inherit pkgs; }}"; 
+      wayland.enable = true;
+      theme = "${import ../../pkgs/sddm-theme.nix {inherit pkgs;}}"; # Scuffed?
     };
 
     # Specify session packages for the display manager
-    displayManager.sessionPackages = [ pkgs.hyprland ];
+    displayManager.sessionPackages = [pkgs.hyprland];
   };
-
 
   # Enable OpenGL
   hardware.opengl = {
@@ -166,46 +143,44 @@
     driSupport32Bit = true;
   };
 
+  # Configure and Enable Nvidia
   hardware.nvidia = {
-
     # Modesetting is required.
-     modesetting.enable = true;
+    modesetting.enable = true;
 
     # Nvidia power management. Experimental, and can cause sleep/suspend to fail.
     # Enable this if you have graphical corruption issues or application crashes after waking
-    # up from sleep. This fixes it by saving the entire VRAM memory to /tmp/ instead 
+    # up from sleep. This fixes it by saving the entire VRAM memory to /tmp/ instead
     # of just the bare essentials.
-     powerManagement.enable = false;
+    powerManagement.enable = false;
 
     # Fine-grained power management. Turns off GPU when not in use.
     # Experimental and only works on modern Nvidia GPUs (Turing or newer).
-     powerManagement.finegrained = false;
+    powerManagement.finegrained = false;
 
     # Use the NVidia open source kernel module (not to be confused with the
     # independent third-party "nouveau" open source driver).
-    # Support is limited to the Turing and later architectures. Full list of 
-    # supported GPUs is at: 
-    # https://github.com/NVIDIA/open-gpu-kernel-modules#compatible-gpus 
+    # Support is limited to the Turing and later architectures. Full list of
+    # supported GPUs is at:
+    # https://github.com/NVIDIA/open-gpu-kernel-modules#compatible-gpus
     # Only available from driver 515.43.04+
     # Currently alpha-quality/buggy, so false is currently the recommended setting.
-     open = false;
+    open = false;
 
+    # Use Prime
     prime = {
       sync.enable = true;
       intelBusId = "PCI:0:2:0";
       nvidiaBusId = "PCI:1:0:0";
-    }; 
+    };
 
     # Enable the Nvidia settings menu,
-	  # accessible via `nvidia-settings`.
+    # accessible via `nvidia-settings`.
     nvidiaSettings = true;
 
     # Optionally, you may need to select the appropriate driver version for your specific GPU.
     package = config.boot.kernelPackages.nvidiaPackages.stable;
   };
-
-  # Enable CUPS to print documents.
-  #services.printing.enable = true
 
   # Enable sound with pipewire.
   sound.enable = true;
@@ -223,42 +198,28 @@
     #media-session.enable = true;
   };
 
-  hardware.bluetooth.enable = true; # enables support for Bluetooth
-  hardware.bluetooth.powerOnBoot = true; # powers up the default Bluetooth controller on boot
+  # Enable Bluetooth on Boot
+  hardware.bluetooth.enable = true;
+  hardware.bluetooth.powerOnBoot = true;
 
-  # ZSH
+  # Enable the Z Shell
   programs.zsh.enable = true;
-
-  # Fish
-  #programs.fish.enable = true;
 
   # Dconf for home-manager
   programs.dconf.enable = true;
 
- # Uncomment if using fish
- # programs.bash = {
- # interactiveShellInit = ''
- #   if [[ $(${pkgs.procps}/bin/ps --no-header --pid=$PPID --format=comm) != "fish" && -z ''${BASH_EXECUTION_STRING} ]]
- #   then
- #     shopt -q login_shell && LOGIN_OPTION='--login' || LOGIN_OPTION=""
- #     exec ${pkgs.fish}/bin/fish $LOGIN_OPTION
- #   fi
- # '';
- # };
-
-  # Define a user account. Don't forget to set a password with ‘passwd’.
+  # Define my user account
   users.users.cinny = {
     isNormalUser = true;
-    description = "cinny";
-    extraGroups = [ "networkmanager" "wheel" "audio" "video" "plugdev" "cdrom" ];
+    description = "Default User";
+    extraGroups = ["networkmanager" "wheel" "audio" "video" "plugdev" "cdrom"];
     shell = pkgs.zsh;
     packages = with pkgs; [
-
       # Main Apps
-      vesktop 
+      vesktop
       samba
       fastfetch
-      transmission#-gtk
+      transmission #-gtk
       tgpt
       krabby
       pavucontrol
@@ -269,15 +230,15 @@
       mpv
       cmus-notify
       birch
-      inputs.nixvim.packages."x86_64-linux".default # Custom Nixvim Distro
+      inputs.nixvim.packages."x86_64-linux".default # Custom Nixvim Config
 
-    # Hyprland Dependancys
+      # Hyprland Dependancys
       waybar
       swww
       bibata-cursors
       polkit_gnome
       rofi-wayland
-      wl-clipboard 
+      wl-clipboard
       slurp
       grim
       swayidle
@@ -289,37 +250,37 @@
   };
 
   # List packages installed in system profile. To search, run:
-  # $ nix search wget
+  # nix search wget
   environment.systemPackages = with pkgs; [
-    libsForQt5.qt5.qtquickcontrols2   
+    libsForQt5.qt5.qtquickcontrols2
     libsForQt5.qt5.qtgraphicaleffects
     font-awesome
     cifs-utils
   ];
 
-  # Nerd font
+  # Configure Nerd Fonts
   fonts.packages = with pkgs; [
-    (nerdfonts.override { fonts = [ "FiraCode" ]; })
+    (nerdfonts.override {fonts = ["FiraCode"];})
   ];
 
-  # For mount.cifs, required unless domain name resolution is not needed.
+  # Mount my servers Samba share
   fileSystems."/mnt/samba_share" = {
     device = "//192.168.50.52/samba-share";
     fsType = "cifs";
     options = let
       # this line prevents hanging on network split
       automount_opts = "x-systemd.automount,noauto,x-systemd.idle-timeout=60,x-systemd.device-timeout=5s,x-systemd.mount-timeout=5s";
-
     in ["${automount_opts},credentials=/etc/nixos/secrets/smb-secrets"];
   };
 
+  # Start polkit-gnome on boot
   systemd = {
-  user.services.polkit-gnome-authentication-agent-1 = {
-    description = "polkit-gnome-authentication-agent-1";
-    wantedBy = [ "graphical-session.target" ];
-    wants = [ "graphical-session.target" ];
-    after = [ "graphical-session.target" ];
-    serviceConfig = {
+    user.services.polkit-gnome-authentication-agent-1 = {
+      description = "polkit-gnome-authentication-agent-1";
+      wantedBy = ["graphical-session.target"];
+      wants = ["graphical-session.target"];
+      after = ["graphical-session.target"];
+      serviceConfig = {
         Type = "simple";
         ExecStart = "${pkgs.polkit_gnome}/libexec/polkit-gnome-authentication-agent-1";
         Restart = "on-failure";
@@ -328,16 +289,6 @@
       };
     };
   };
-
-  # Some programs need SUID wrappers, can be configured further or are
-  # started in user sessions.
-  # programs.mtr.enable = true;
-  # programs.gnupg.agent = {
-  #   enable = true;
-  #   enableSSHSupport = true;
-  # };
-
-  # List services that you want to enable:
 
   # Enable the OpenSSH daemon.
   services.openssh.enable = true;
@@ -353,8 +304,8 @@
   services.tumbler.enable = true;
   security.pam.services.swaylock = {};
   security.polkit.enable = true;
-  
-  # XDG Portal
+
+  # Configure XDG
   xdg = {
     portal = {
       wlr.enable = true;
@@ -366,12 +317,6 @@
       config.common.default = "*";
     };
   };
-
-  # Open ports in the firewall.
-  # networking.firewall.allowedTCPPorts = [ ... ];
-  # networking.firewall.allowedUDPPorts = [ ... ];
-  # Or disable the firewall altogether.
-  # networking.firewall.enable = false;
 
   # This value determines the NixOS release from which the default
   # settings for stateful data, like file locations and database versions

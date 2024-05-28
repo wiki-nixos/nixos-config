@@ -1,5 +1,8 @@
-{ lib, stdenv, fetchFromGitHub }:
-
+{
+  lib,
+  stdenv,
+  fetchFromGitHub,
+}:
 stdenv.mkDerivation rec {
   pname = "birch";
   version = "1.0.0";
@@ -11,9 +14,9 @@ stdenv.mkDerivation rec {
     sha256 = "sha256-8TBsrRmpMl0z9e2gbPpj0ZR0zt1Kn+A4xRAq89Ww4og=";
   };
 
-  nativeBuildInputs = [ ];
+  nativeBuildInputs = [];
 
-  buildInputs = [ ];
+  buildInputs = [];
 
   installPhase = ''
     mkdir -p $out/bin
@@ -24,7 +27,6 @@ stdenv.mkDerivation rec {
     description = "An IRC client written in bash";
     homepage = "https://github.com/dylanaraps/birch";
     license = licenses.mit;
-    maintainers = with maintainers; [ ];
+    maintainers = with maintainers; [];
   };
 }
-

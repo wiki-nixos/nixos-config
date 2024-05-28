@@ -1,7 +1,9 @@
-{ config, pkgs, ... }:
-
 {
+  config,
+  pkgs,
+  ...
+}: {
   programs.btop = {
     enable = true;
-  };  
+  };
 }

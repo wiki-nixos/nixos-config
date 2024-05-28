@@ -1,5 +1,8 @@
-{ lib, stdenv, fetchFromGitHub }:
-
+{
+  lib,
+  stdenv,
+  fetchFromGitHub,
+}:
 stdenv.mkDerivation rec {
   pname = "Package NAME";
   version = "1.0.0";
@@ -11,9 +14,9 @@ stdenv.mkDerivation rec {
     sha256 = "sha256-AAAAAAAAAA";
   };
 
-  nativeBuildInputs = [ ];
+  nativeBuildInputs = [];
 
-  buildInputs = [ ];
+  buildInputs = [];
 
   installPhase = ''
     mkdir -p $out/bin
@@ -24,7 +27,6 @@ stdenv.mkDerivation rec {
     description = "Repo Description";
     homepage = "https://github.com/user/repo";
     license = licenses.licensehere;
-    maintainers = with maintainers; [ ];
+    maintainers = with maintainers; [];
   };
 }
-

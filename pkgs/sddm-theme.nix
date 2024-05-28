@@ -1,5 +1,4 @@
-{ pkgs }:
-
+{pkgs}:
 pkgs.stdenv.mkDerivation {
   name = "simple-sddm";
   src = pkgs.fetchFromGitHub {
@@ -11,5 +10,5 @@ pkgs.stdenv.mkDerivation {
   installPhase = ''
     mkdir -p $out
     cp -R ./* $out/
-   '';
+  '';
 }
