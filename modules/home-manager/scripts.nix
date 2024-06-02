@@ -42,11 +42,19 @@
     '';
   };
 
+  screenshot = pkgs.writeShellApplication {
+    name = "screenshot";
+    runtimeInputs = with pkgs; [grim slurp swappy];
+    text = ''
+      grim -g "$(slurp)" - | swappy -f -
+    '';
+  };
+
   wallpaper-fix = pkgs.writeShellApplication {
     name = "wallpaper-fix";
     runtimeInputs = with pkgs; [swww];
     text = ''
-      swww init && swww img /etc/nixos/wallpapers/2.jpg
+      swww init ; swww img /etc/nixos/wallpapers/2.jpg
     '';
   };
 
@@ -149,15 +157,15 @@
       "SUPER W" "Open Firefox" "firefox" \
       "SUPER Return" "Open Terminal" "kitty" \
       "SUPER T" "Open Thunar" "thunar" \
-      "SUPER H" "Open Keybinds Menu" "/etc/nixos/modules/home-manager/scripts/keybinds.sh" \
+      "SUPER H" "Open Keybinds Menu" "keybinds" \
       "SUPER Q" "Kill Active Window" "killactive" \
       "SUPER V" "Toggle Floating" "togglefloating" \
       "SUPER D" "App Launcher" "rofi -show drun -config /etc/nixos/modules/home-manager/rofi/rofidmenu.rasi" \
-      "SUPER ALT V" "Clipboard Manager" "/etc/nixos/modules/home-manager/scripts/clipboard.sh" \
-      "SUPER SHIFT Q" "Open wlogout" "/etc/nixos/modules/home-manager/scripts/poweroff.sh" \
+      "SUPER ALT V" "Clipboard Manager" "clipboard" \
+      "SUPER SHIFT Q" "Open wlogout" "wlogout" \
       "SUPER P" "Pseudo Mode" "pseudo" \
       "SUPER J" "Toggle Split" "togglesplit" \
-      "SUPER S" "Take Screenshot" "/etc/nixos/modules/home-manager/scripts/screenshot.sh" \
+      "SUPER S" "Take Screenshot" "screenshot" \
       "SUPER F" "Fullscreen" "fullscreen" \
       "SUPER Left" "Move Focus Left" "movefocus l" \
       "SUPER Right" "Move Focus Right" "movefocus r" \

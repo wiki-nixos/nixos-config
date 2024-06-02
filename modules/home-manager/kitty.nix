@@ -17,7 +17,7 @@
       scrollback_lines = 10000;
       enable_audio_bell = false;
       confirm_os_window_close = 0;
-      background_opacity = "0.8";
+      background_opacity = "0.7";
 
       # tab bar settings
       tab_bar_edge = "bottom";

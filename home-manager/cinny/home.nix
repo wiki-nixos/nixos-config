@@ -35,6 +35,7 @@ in {
     outputs.homeManagerModules.swayidle
     outputs.homeManagerModules.swappy
     outputs.homeManagerModules.cmus
+    outputs.homeManagerModules.tmux
   ];
 
   nixpkgs = {

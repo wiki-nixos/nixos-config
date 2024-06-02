@@ -10,7 +10,7 @@
 
     settings = {
       exec-once = [
-        "swww init ; swww img /etc/nixos/wallpapers/2.jpg"
+        "wallpaper-fix"
         #"/etc/nixos/modules/home-manager/scripts/borders.sh"
         "swayidle -w timeout 600 'swaylock'"
         "waybar"
@@ -34,8 +34,7 @@
       };
 
       decoration = {
-        #rounding = 20;
-        rounding = 0;
+        rounding = 20;
         inactive_opacity = 0.95;
         blur = {
           enabled = true;
@@ -88,12 +87,12 @@
         "$mod, Q, killactive"
         "$mod, V, togglefloating"
         "$mod, D, exec, rofi -show drun -config /etc/nixos/modules/home-manager/rofi/rofidmenu.rasi"
-        "$mod, H, exec,  /etc/nixos/modules/home-manager/scripts/keybinds.sh"
-        "$mod ALT, V, exec, /etc/nixos/modules/home-manager/scripts/clipboard.sh"
-        "$mod SHIFT, Q, exec, /etc/nixos/modules/home-manager/scripts/poweroff.sh"
+        "$mod, H, exec,  keybinds"
+        "$mod ALT, V, exec, clipboard"
+        "$mod SHIFT, Q, exec, wlogout"
         "$mod, P, pseudo"
         "$mod, J, togglesplit"
-        "$mod, S, exec, /etc/nixos/modules/home-manager/scripts/screenshot.sh"
+        "$mod, S, exec, screenshot"
         "$mod, F, fullscreen"
         "$mod, left, movefocus, l"
         "$mod, right, movefocus, r"

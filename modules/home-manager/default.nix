@@ -21,4 +21,5 @@
   swappy = import ./swappy.nix;
   lunarvim = import ./lunarvim.nix;
   cmus = import ./cmus.nix;
+  tmux = import ./tmux.nix;
 }
