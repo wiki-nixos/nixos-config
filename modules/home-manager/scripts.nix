@@ -155,7 +155,7 @@
           --column=Command: \
           --timeout-indicator=bottom \
       "SUPER W" "Open Firefox" "firefox" \
-      "SUPER Return" "Open Terminal" "kitty" \
+      "SUPER Return" "Open Terminal" "kitty tmux" \
       "SUPER T" "Open Thunar" "thunar" \
       "SUPER H" "Open Keybinds Menu" "keybinds" \
       "SUPER Q" "Kill Active Window" "killactive" \

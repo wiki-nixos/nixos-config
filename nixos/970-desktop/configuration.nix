@@ -61,6 +61,8 @@
       experimental-features = "nix-command flakes";
       # Deduplicate and optimize nix store
       auto-optimise-store = true;
+      extra-substituters = [ "https://cache.lix.systems" ];
+      trusted-public-keys = [ "cache.lix.systems:aBnZUw8zA7H35Cz2RyKFVs3H4PlGTLawyY5KRbvJR8o=" ];
     };
 
     gc = {
@@ -124,16 +126,16 @@
 
     # Exclude Xterm
     excludePackages = with pkgs; [xterm];
+  };
 
+  services.displayManager = {
     # Configure SDDM with custom theme.
-    displayManager.sddm = {
+    sddm = {
       enable = true;
       wayland.enable = true;
       theme = "${import ../../pkgs/sddm-theme.nix {inherit pkgs;}}"; # Scuffed?
     };
-
-    # Specify session packages for the display manager
-    displayManager.sessionPackages = [pkgs.hyprland];
+    sessionPackages = [pkgs.hyprland];
   };
 
   # Enable OpenGL
@@ -230,6 +232,7 @@
       mpv
       cmus-notify
       birch
+      eza
       inputs.nixvim.packages."x86_64-linux".default # Custom Nixvim Config
 
       # Hyprland Dependancys
@@ -245,7 +248,6 @@
       jq
       yad
       activate-linux
-      waypaper
     ];
   };
 
@@ -255,12 +257,13 @@
     libsForQt5.qt5.qtquickcontrols2
     libsForQt5.qt5.qtgraphicaleffects
     font-awesome
+    noto-fonts-emoji
     cifs-utils
   ];
 
   # Configure Nerd Fonts
   fonts.packages = with pkgs; [
-    (nerdfonts.override {fonts = ["FiraCode"];})
+    (nerdfonts.override {fonts = ["FiraCode" "JetBrainsMono"];})
   ];
 
   # Mount my servers Samba share
@@ -324,5 +327,5 @@
   # this value at the release version of the first install of this system.
   # Before changing this value read the documentation for this option
   # (e.g. man configuration.nix or on https://nixos.org/nixos/options.html).
-  system.stateVersion = "23.11"; # Did you read the comment?
+  system.stateVersion = "24.05"; # Did you read the comment?
 }

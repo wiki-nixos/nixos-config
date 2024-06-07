@@ -6,7 +6,7 @@
 }: {
   programs.kitty = {
     enable = true;
-    #theme = "Catppuccin-Mocha";
+    #theme = "Dark Pastel";
     # Adjustments for font configuration according to the NixOS options
     font = {
       name = "Fira Code";
@@ -25,6 +25,9 @@
       # Fixed typo from `tab_powerline_syle` to `tab_powerline_style`
       tab_powerline_style = "angled";
       tab_title_template = "{title}{ ' :{}:'.format(num_windows) if num_windows > 1 else ''}";
+    };
+    shellIntegration = {
+      enableZshIntegration = true;
     };
   };
 }

@@ -1,7 +1,6 @@
 {
-  config,
-  lib,
   pkgs,
+  config,
   ...
 }: {
   programs.zsh = {
@@ -13,12 +12,12 @@
     krabby random -s --no-title
     ";
 
-    oh-my-zsh = {
-      enable = true;
-      #custom = ohMyZshCustom.outPath; # Use .outPath to ensure a string path is used
-      theme = "agnoster";
-      plugins = ["git"];
-    };
+    #oh-my-zsh = {
+    #  enable = true;
+    #  #custom = ohMyZshCustom.outPath; # Use .outPath to ensure a string path is used
+    #  theme = "agnoster";
+    #  plugins = ["git"];
+    #};
 
     shellAliases = {
       ll = "ls -l";
@@ -28,7 +27,7 @@
       code = "codium";
       stopwatch = "now=$(date +%s)sec; watch -n0.1 -p TZ=UTC date --date now-$now +%H:%M:%S.%N";
       transmission = "transmission-cli";
-      mount-samba = "/etc/nixos/modules/home-manager/scripts/mount_samba.sh";
+      ls = "eza";
     };
 
     history.size = 10000;

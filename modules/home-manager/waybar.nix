@@ -42,15 +42,15 @@
           format-all = "{:%a, %d. %b %H:%M}";
         };
         cpu = {
-          format = " {usage}%";
+          format = "  {usage}%";
           tooltip = false;
         };
         disk = {
-          format = " {}%";
+          format = "  {}%";
           tooltip-format = "{used} / {total} used";
         };
         memory = {
-          format = " {}%";
+          format = "  {}%";
           tooltip-format = "{used:0.1f}G / {total:0.1f}G used";
         };
         temperature = {
@@ -77,8 +77,8 @@
             empty = 5;
           };
           format = "{icon} {capacity}%";
-          formatCharging = " {capacity}%";
-          formatPlugged = " {capacity}%";
+          formatCharging = "  {capacity}%";
+          formatPlugged = "  {capacity}%";
           formatEmpty = "";
           formatFull = "";
           formatIcons = ["" "" "" "" ""];
@@ -119,7 +119,7 @@
           wifi = {
             interface = "wlp*";
             format-ethernet = "";
-            format-wifi = " {essid} ({signalStrength}%)";
+            format-wifi = "  {essid} ({signalStrength}%)";
             format-linked = "";
             format-disconnected = "";
             tooltip-format = "{ifname}: {ipaddr}/{cidr}";
@@ -138,15 +138,15 @@
           format = "{icon} {volume}%{format_source}";
           format-bluetooth = "{icon}  {volume}%{format_source}";
           format-bluetooth-muted = " {icon}  {format_source}";
-          format-muted = "  {format_source}";
+          format-muted = " {format_source}";
           format-source = "  {volume}%";
-          format-source-muted = " ";
+          format-source-muted = "  ";
           format-icons = {
             headphone = " ";
             phone = " ";
             portable = " ";
             car = " ";
-            default = ["" "" " "];
+            default = [" " "  " "  "];
           };
           on-click = "pavucontrol";
         };
@@ -156,11 +156,11 @@
           onClick = "firefox https://wttr.in";
         };
         "custom/poweroff" = {
-          format = "";
+          format = " ";
           on-click = "wlogout";
         };
         "custom/keybinds" = {
-          format = " ";
+          format = "  ";
           on-click = "sh keybinds";
         };
       }

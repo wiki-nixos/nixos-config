@@ -22,6 +22,9 @@
         tabliss
         disable-javascript
         buster-captcha-solver
+        return-youtube-dislikes
+        privacy-badger
+        sponsorblock
         localcdn
       ];
 
@@ -77,10 +80,6 @@
       };
 
       settings = {
-        # Use My Silly SearXNG Instance
-        "browser.search.defaultenginename" = "HomeLab SearXNG";
-        "browser.search.order.1" = "HomeLab SearXNG";
-
         # Tell websites not to sell or share my data
         "privacy.globalprivacycontrol.enabled" = true;
 
@@ -136,8 +135,8 @@
 
       search = {
         force = true;
-        default = "HomeLab SearXNG";
-        order = ["Homelab SearXNG"];
+        default = "DuckDuckGo";
+        order = ["DuckDuckGo"];
       };
     };
   };

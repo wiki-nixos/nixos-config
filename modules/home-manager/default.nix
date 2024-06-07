@@ -22,4 +22,5 @@
   lunarvim = import ./lunarvim.nix;
   cmus = import ./cmus.nix;
   tmux = import ./tmux.nix;
+  starship = import ./starship.nix;
 }

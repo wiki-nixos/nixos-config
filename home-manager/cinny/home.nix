@@ -10,7 +10,6 @@
   # Import the scripts from the specified path
   scripts = builtins.attrValues (import ../../modules/home-manager/scripts.nix {inherit pkgs;});
 in {
-  # You can import other home-manager modules here
   imports = [
     # If you want to use modules your own flake exports (from modules/home-manager):
     # outputs.homeManagerModules.example
@@ -36,6 +35,7 @@ in {
     outputs.homeManagerModules.swappy
     outputs.homeManagerModules.cmus
     outputs.homeManagerModules.tmux
+    outputs.homeManagerModules.starship
   ];
 
   nixpkgs = {
@@ -65,7 +65,6 @@ in {
     };
   };
 
-  # TODO: Set your username
   home = {
     username = "cinny";
     homeDirectory = "/home/cinny";
@@ -86,5 +85,5 @@ in {
   systemd.user.startServices = "sd-switch";
 
   # https://nixos.wiki/wiki/FAQ/When_do_I_update_stateVersion
-  home.stateVersion = "23.11";
+  home.stateVersion = "24.05";
 }

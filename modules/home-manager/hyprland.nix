@@ -83,7 +83,7 @@
       bind = [
         "$mod, W, exec, firefox"
         "$mod, T, exec, thunar"
-        "$mod, Return, exec, kitty"
+        "$mod, Return, exec, kitty tmux"
         "$mod, Q, killactive"
         "$mod, V, togglefloating"
         "$mod, D, exec, rofi -show drun -config /etc/nixos/modules/home-manager/rofi/rofidmenu.rasi"

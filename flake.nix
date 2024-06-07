@@ -2,14 +2,26 @@
   description = "Eternal's Nix Flake";
 
   inputs = {
-    # Nixpkgs
-    nixpkgs.url = "github:nixos/nixpkgs/nixos-unstable";
 
-    # Nixpkgs Stable
-    nixpkgs-stable.url = "github:nixos/nixpkgs/nixos-23.11";
+    # Lix
+    lix = {
+      url = "git+https://git.lix.systems/lix-project/lix?ref=refs/tags/2.90-beta.1";
+      flake = false;
+    };
+    lix-module = {
+      url = "git+https://git.lix.systems/lix-project/nixos-module";
+      inputs.lix.follows = "lix";
+      inputs.nixpkgs.follows = "nixpkgs";
+    };
+
+    # Nixpkgs
+    nixpkgs.url = "github:nixos/nixpkgs/nixos-24.05";
+
+    # Nixpkgs Unstable
+    nixpkgs-unstable.url = "github:nixos/nixpkgs/nixos-unstable";
 
     # Home manager
-    home-manager.url = "github:nix-community/home-manager/master";
+    home-manager.url = "github:nix-community/home-manager/release-24.05";
     home-manager.inputs.nixpkgs.follows = "nixpkgs";
 
     # Hardware
@@ -34,13 +46,15 @@
   outputs = {
     self,
     nixpkgs,
-    nixpkgs-stable,
+    nixpkgs-unstable,
     home-manager,
     nixos-hardware,
     chaotic,
     nur,
     firefox-addons,
     hyprland,
+    nixvim,
+    lix-module,
     ...
   } @ inputs: let
     inherit (self) outputs;
@@ -74,6 +88,7 @@
           chaotic.nixosModules.default
           nur.nixosModules.nur
           nixos-hardware.nixosModules.common-cpu-intel-sandy-bridge
+          lix-module.nixosModules.default
         ];
       };
     };
