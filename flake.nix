@@ -2,7 +2,6 @@
   description = "Eternal's Nix Flake";
 
   inputs = {
-
     # Lix
     lix = {
       url = "git+https://git.lix.systems/lix-project/lix?ref=refs/tags/2.90-beta.1";

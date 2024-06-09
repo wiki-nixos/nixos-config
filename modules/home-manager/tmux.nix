@@ -8,7 +8,7 @@
       {
         plugin = power-theme;
         extraConfig = ''
-          set -g @tmux_power_theme '#ffffff'
+          set -g @tmux_power_theme '#7CA3F1'
         '';
       }
     ];

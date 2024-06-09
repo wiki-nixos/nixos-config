@@ -61,8 +61,8 @@
       experimental-features = "nix-command flakes";
       # Deduplicate and optimize nix store
       auto-optimise-store = true;
-      extra-substituters = [ "https://cache.lix.systems" ];
-      trusted-public-keys = [ "cache.lix.systems:aBnZUw8zA7H35Cz2RyKFVs3H4PlGTLawyY5KRbvJR8o=" ];
+      extra-substituters = ["https://cache.lix.systems"];
+      trusted-public-keys = ["cache.lix.systems:aBnZUw8zA7H35Cz2RyKFVs3H4PlGTLawyY5KRbvJR8o="];
     };
 
     gc = {
@@ -210,6 +210,9 @@
   # Dconf for home-manager
   programs.dconf.enable = true;
 
+  # Use micro instead of nano
+  programs.nano.enable = false;
+
   # Define my user account
   users.users.cinny = {
     isNormalUser = true;
@@ -233,6 +236,7 @@
       cmus-notify
       birch
       eza
+      micro
       inputs.nixvim.packages."x86_64-linux".default # Custom Nixvim Config
 
       # Hyprland Dependancys
@@ -248,6 +252,7 @@
       jq
       yad
       activate-linux
+      hyprpicker
     ];
   };
 

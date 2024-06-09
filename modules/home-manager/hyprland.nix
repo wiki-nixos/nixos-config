@@ -90,6 +90,7 @@
         "$mod, H, exec,  keybinds"
         "$mod ALT, V, exec, clipboard"
         "$mod SHIFT, Q, exec, wlogout"
+        "$mod ALT, C, exec, color-picker"
         "$mod, P, pseudo"
         "$mod, J, togglesplit"
         "$mod, S, exec, screenshot"
