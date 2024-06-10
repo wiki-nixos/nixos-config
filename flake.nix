@@ -90,6 +90,17 @@
           lix-module.nixosModules.default
         ];
       };
+      "xps" = nixpkgs.lib.nixosSystem {
+        specialArgs = {inherit inputs outputs;};
+        modules = [
+          # > Main NixOS configuration file <
+          ./nixos/xps/configuration.nix
+          chaotic.nixosModules.default
+          nur.nixosModules.nur
+          # Hardware here
+          lix-module.nixosModules.default
+        ];
+      };
     };
   };
 }
