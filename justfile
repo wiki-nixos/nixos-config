@@ -8,12 +8,12 @@ luks-key password:
         sudo echo -n "{{password}}" > /tmp/secret.key
 
 # run disko
-disko path:
-        sudo nix --experimental-features "nix-command flakes" run github:nix-community/disko -- --mode disko {{path}}
+disko path device:
+        sudo nix --experimental-features "nix-command flakes" run github:nix-community/disko -- --mode disko {{path}} --arg device '"{{device}}"'
 
 # Move config to /mnt/etc/nixos
 move-config:
-        sudo cp -r * .git /mnt/etc/nixos
+        sudo cp -r * .git .gitignore /mnt/etc/nixos
 
 # Generate hardware-configuration.nix
 generate-hardware host:

@@ -13,6 +13,7 @@
     ./hardware-configuration.nix
     outputs.nixosModules.plymouth
     inputs.home-manager.nixosModules.home-manager
+    (import ./disko.nix)
   ];
 
   home-manager = {

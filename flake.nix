@@ -26,6 +26,12 @@
     # Hardware
     nixos-hardware.url = "github:NixOS/nixos-hardware/master";
 
+    # Disko
+    disko = {
+      url = "github:nix-community/disko";
+      inputs.nixpkgs.follows = "nixpkgs";
+    };
+
     # Chaotic
     chaotic.url = "github:chaotic-cx/nyx/nyxpkgs-unstable";
 
@@ -49,6 +55,7 @@
     home-manager,
     nixos-hardware,
     chaotic,
+    disko,
     nur,
     firefox-addons,
     hyprland,
@@ -99,6 +106,8 @@
           nur.nixosModules.nur
           nixos-hardware.nixosModules.dell-xps-13-9360
           lix-module.nixosModules.default
+          (import ./nixos/xps/disko.nix)
+          inputs.disko.nixosModules.default
         ];
       };
     };
