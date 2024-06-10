@@ -7,7 +7,7 @@
         name = "topbar";
         layer = "top";
         position = "top";
-        modules-left = ["hyprland/workspaces" "cpu" "disk" "memory" "temperature" "pulseaudio" "backlight" "battery#bat1" "battery#bat2"];
+        modules-left = ["hyprland/workspaces" "cpu" "disk" "memory" "temperature" "pulseaudio" "backlight" "battery#bat1"];
         modules-center = ["hyprland/window"];
         modules-right = ["network" "custom/weather" "tray" "clock" "custom/keybinds" "custom/poweroff"];
         "hyprland/workspaces" = {
@@ -31,7 +31,7 @@
           max-length = 70;
         };
         battery = {
-          format = "{capacity}% {icon}";
+          format = "{icon} {capacity}%";
           format-icons = ["" "" "" "" ""];
         };
         tray = {
@@ -62,8 +62,7 @@
           interval = 1;
           onScrollDown = "brightlight -pd 1";
           onScrollUp = "brightlight -pi 1";
-          format = "{icon} {percent}%";
-          formatIcons = ["" ""];
+          format = "  {percent}%";
           onClick = "wdisplays";
         };
         battery.bat1 = {
@@ -76,12 +75,7 @@
             good = 99;
             empty = 5;
           };
-          format = "{icon} {capacity}%";
-          formatCharging = "  {capacity}%";
-          formatPlugged = "  {capacity}%";
-          formatEmpty = "";
-          formatFull = "";
-          formatIcons = ["" "" "" "" ""];
+          format = "  {capacity}%";
         };
         battery.bat2 = {
           bat = "BAT1";
@@ -92,11 +86,7 @@
             good = 99;
             critical = 15;
           };
-          format = "{icon} {capacity}%";
-          formatCharging = " {capacity}%";
-          formatPlugged = " {capacity}%";
-          formatFull = "";
-          formatIcons = ["" "" "" "" ""];
+          format = "  {capacity}%";
         };
         network = {
           disconnected = {
@@ -146,7 +136,7 @@
             phone = " ";
             portable = " ";
             car = " ";
-            default = [" " "  " "  "];
+            default = [" " " " "  "];
           };
           on-click = "pavucontrol";
         };
