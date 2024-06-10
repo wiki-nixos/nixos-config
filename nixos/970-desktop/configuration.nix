@@ -252,7 +252,6 @@
       jq
       yad
       activate-linux
-      hyprpicker
     ];
   };
 

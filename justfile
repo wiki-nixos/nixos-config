@@ -6,6 +6,10 @@ disko path:
 format:
 	nix fmt .
 
+# Passkey for the encrypted partition
+luks-key password:
+  sudo echo -n "{{password}}" > /tmp/secret.key
+
 # install NixOS
 install host:
 	sudo nixos-install --flake .#{{host}}

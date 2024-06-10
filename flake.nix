@@ -97,7 +97,7 @@
           ./nixos/xps/configuration.nix
           chaotic.nixosModules.default
           nur.nixosModules.nur
-          # Hardware here
+          nixos-hardware.nixosModules.dell-xps-13-9360
           lix-module.nixosModules.default
         ];
       };

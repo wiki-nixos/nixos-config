@@ -6,7 +6,7 @@
 }: {
   programs.kitty = {
     enable = true;
-    #theme = "Dark Pastel";
+    theme = "IR Black";
     # Adjustments for font configuration according to the NixOS options
     font = {
       name = "Fira Code";
