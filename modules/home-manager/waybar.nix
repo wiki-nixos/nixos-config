@@ -7,7 +7,7 @@
         name = "topbar";
         layer = "top";
         position = "top";
-        modules-left = ["hyprland/workspaces" "cpu" "disk" "memory" "temperature" "pulseaudio" "backlight" "battery#bat1"];
+        modules-left = [ "hyprland/workspaces" "cpu" "disk" "memory" "temperature" "pulseaudio" "backlight" "battery"];
         modules-center = ["hyprland/window"];
         modules-right = ["network" "custom/weather" "tray" "clock" "custom/keybinds" "custom/poweroff"];
         "hyprland/workspaces" = {
@@ -31,8 +31,15 @@
           max-length = 70;
         };
         battery = {
+          interval = 1;
+          states = {
+            warning = 30;
+            critical = 15;
+          };
           format = "{icon} {capacity}%";
-          format-icons = ["" "" "" "" ""];
+          format-charging = "{capacity}% ";
+          format-icons = [" " " " " " " " " "];
+          max-length = 25;
         };
         tray = {
           icon-size = 21;
@@ -128,7 +135,7 @@
           format = "{icon} {volume}%{format_source}";
           format-bluetooth = "{icon}  {volume}%{format_source}";
           format-bluetooth-muted = " {icon}  {format_source}";
-          format-muted = " {format_source}";
+          format-muted = "M {format_source}";
           format-source = "  {volume}%";
           format-source-muted = "  ";
           format-icons = {
@@ -136,7 +143,7 @@
             phone = " ";
             portable = " ";
             car = " ";
-            default = [" " " " "  "];
+            default = ["" " " "  "];
           };
           on-click = "pavucontrol";
         };

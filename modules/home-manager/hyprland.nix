@@ -15,9 +15,12 @@
         "swayidle -w timeout 600 'swaylock'"
         "waybar"
         "dunst"
+        "nm-applet"
+        "blueman-applet"
         "hyprctl setcursor Bibata-Modern-Classic 24"
         "systemctl --user import-environment PATH && systemctl --user restart xdg-desktop-portal.service"
         "activate-linux --text-title 'Activate NixOS' --text-message 'Go to /etc/nixos to activate NixOS' --text-font 'Fira Code'"
+        "mpv /etc/nixos/modules/home-manager/hyprland/startup.wav" # HARDCODED!
       ];
 
       input = {
@@ -71,6 +74,7 @@
 
       monitor = [
         "HDMI-1, 2560x1440@59.95, auto, 1"
+        "eDP-1, 1920x1080@59.95, auto, 1"
       ];
 
       env = [
@@ -121,6 +125,14 @@
         "$mod SHIFT, 7, movetoworkspace, 7"
         "$mod SHIFT, 8, movetoworkspace, 8"
         "$mod SHIFT, 9, movetoworkspace, 9"
+      ];
+
+      bindl = [
+        ", XF86AudioMute, exec, wpctl set-mute @DEFAULT_AUDIO_SINK@ toggle && notify-send -t 2000 \"Muted\" \"$(wpctl get-volume @DEFAULT_AUDIO_SINK@)\""
+        ", XF86AudioRaiseVolume, exec, wpctl set-volume @DEFAULT_AUDIO_SINK@ 5%+ && notify-send -t 2000 \"Volume Raised\" \"$(wpctl get-volume @DEFAULT_AUDIO_SINK@)\""
+        ", XF86AudioLowerVolume, exec, wpctl set-volume @DEFAULT_AUDIO_SINK@ 5%- && notify-send -t 2000 \"Volume Lowered\" \"$(wpctl get-volume @DEFAULT_AUDIO_SINK@)\""
+        ", XF86MonBrightnessDown, exec, brightnessctl set 5%- && notify-send -t 2000 \"Decreased brightness to\" \"$(brightnessctl get)\""
+        ", XF86MonBrightnessUp, exec, brightnessctl set +5% && notify-send -t 2000 \"Increased brightness to\" \"$(brightnessctl get)\""
       ];
 
       bindm = [

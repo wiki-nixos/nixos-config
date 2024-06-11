@@ -191,13 +191,16 @@
       pavucontrol
       xfce.thunar
       blueman
+      networkmanagerapplet
       spotify-player
       imv
       mpv
       cmus-notify
       birch
       eza
-      micro
+      nitch 
+      cbonsai 
+      cmatrix
       inputs.nixvim.packages."x86_64-linux".default # Custom Nixvim Config
 
       # Hyprland Dependancys
@@ -213,6 +216,8 @@
       jq
       yad
       activate-linux
+      brightnessctl
+      libnotify
     ];
   };
 

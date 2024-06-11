@@ -17,7 +17,7 @@ move-config:
 
 # Generate hardware-configuration.nix
 generate-hardware host:
-        sudo nixos-generate-config --root /mnt
+        sudo nixos-generate-config --no-filesystems --root /mnt
         sudo rm /mnt/etc/nixos/configuration.nix
         sudo mv /mnt/etc/nixos/hardware-configuration.nix /mnt/etc/nixos/nixos/{{host}}/
 

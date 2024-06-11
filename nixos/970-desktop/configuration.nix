@@ -230,6 +230,7 @@
       pavucontrol
       xfce.thunar
       blueman
+      networkmanagerapplet
       spotify-player
       imv
       mpv
