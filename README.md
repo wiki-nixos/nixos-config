@@ -12,3 +12,7 @@ Useful resources I used to make this configuration
 - [QuantumCode/neovim](https://github.com/QuantumCoded/neovim)
 - [nix-community/awesome-nix](https://github.com/nix-community/awesome-nix)
 
+- [Desktop Screenshot](https://0x0.st/XbC1.png)
+
+---
+
