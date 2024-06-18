@@ -13,9 +13,9 @@
     ./hardware-configuration.nix
     outputs.nixosModules.plymouth
     inputs.home-manager.nixosModules.home-manager
-    (import ./disko.nix)
   ];
 
+  programs.fuse.userAllowOther = true;
   home-manager = {
     extraSpecialArgs = {inherit inputs outputs;};
     users = {
@@ -85,6 +85,7 @@
       };
     };
     kernelPackages = pkgs.linuxPackages_zen;
+    initrd.systemd.enable = lib.mkForce false;
   };
 
   # Configure NM and Hostname
@@ -171,54 +172,63 @@
   # Dconf for home-manager
   programs.dconf.enable = true;
 
-  # Use micro instead of nano
-  programs.nano.enable = false;
+  sops = {
+    defaultSopsFile = ../../secrets/secrets.yaml;
+    age.keyFile = "/var/lib/key.age";
+    secrets.user_password = {
+      neededForUsers = true;
+      sopsFile = ../../secrets/secrets.yaml;
+      format = "yaml";
+    };
+  };
 
   # Define my user account
-  users.users.eternal = {
-    isNormalUser = true;
-    description = "Default User";
-    extraGroups = ["networkmanager" "wheel" "audio" "video" "plugdev" "cdrom"];
-    shell = pkgs.zsh;
-    packages = with pkgs; [
-      # Main Apps
-      vesktop
-      samba
-      fastfetch
-      transmission #-gtk
-      tgpt
-      krabby
-      pavucontrol
-      xfce.thunar
-      blueman
-      networkmanagerapplet
-      spotify-player
-      imv
-      mpv
-      cmus-notify
-      birch
-      eza
-      nitch 
-      cbonsai 
-      cmatrix
-      inputs.nixvim.packages."x86_64-linux".default # Custom Nixvim Config
+  users = {
+    mutableUsers = false;
+    users.eternal = {
+      isNormalUser = true;
+      hashedPasswordFile = config.sops.secrets.user_password.path;
+      extraGroups = ["networkmanager" "wheel" "audio" "video" "plugdev" "cdrom"];
+      shell = pkgs.zsh;
+      packages = with pkgs; [
+        # Main Apps
+        vesktop
+        samba
+        fastfetch
+        transmission #-gtk
+        tgpt
+        krabby
+        pavucontrol
+        xfce.thunar
+        blueman
+        networkmanagerapplet
+        spotify-player
+        imv
+        mpv
+        cmus-notify
+        birch
+        eza
+        nitch 
+        cbonsai 
+        cmatrix
+        inputs.nixvim.packages."x86_64-linux".default # Custom Nixvim Config
 
-      # Hyprland Dependancys
-      waybar
-      swww
-      bibata-cursors
-      polkit_gnome
-      rofi-wayland
-      wl-clipboard
-      slurp
-      grim
-      swayidle
-      jq
-      yad
-      activate-linux
-      brightnessctl
-      libnotify
-    ];
+        # Hyprland Dependancys
+        swww
+        bibata-cursors
+        polkit_gnome
+        rofi-wayland
+        wl-clipboard
+        slurp
+        grim
+        swayidle
+        jq
+        yad
+        activate-linux
+        brightnessctl
+        libnotify
+      ];
+    };
   };
 
   # List packages installed in system profile. To search, run:
@@ -229,6 +239,7 @@
     font-awesome
     noto-fonts-emoji
     cifs-utils
+    sops
   ];
 
   # Configure Nerd Fonts

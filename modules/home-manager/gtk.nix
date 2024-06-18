@@ -8,7 +8,7 @@
     enable = true;
     theme = {
       package = pkgs.qogir-theme;
-      name = "Qogir-Dark";
+      name = "Qogir-dark";
     };
     iconTheme = {
       package = pkgs.qogir-icon-theme;

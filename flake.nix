@@ -32,6 +32,12 @@
       inputs.nixpkgs.follows = "nixpkgs";
     };
 
+    # Sops 
+    sops-nix = {
+      url = "github:Mic92/sops-nix";
+      inputs.nixpkgs.follows = "nixpkgs";
+    };
+
     # Chaotic
     chaotic.url = "github:chaotic-cx/nyx/nyxpkgs-unstable";
 
@@ -58,6 +64,7 @@
     nixpkgs-unstable,
     home-manager,
     nixos-hardware,
+    sops-nix,
     chaotic,
     disko,
     nur,
@@ -90,17 +97,6 @@
 
     # NixOS configuration entrypoint
     nixosConfigurations = {
-      "970-desktop" = nixpkgs.lib.nixosSystem {
-        specialArgs = {inherit inputs outputs;};
-        modules = [
-          # > Main NixOS configuration file <
-          ./nixos/970-desktop/configuration.nix
-          chaotic.nixosModules.default
-          nur.nixosModules.nur
-          nixos-hardware.nixosModules.common-cpu-intel-sandy-bridge
-          lix-module.nixosModules.default
-        ];
-      };
       "xps" = nixpkgs.lib.nixosSystem {
         specialArgs = {inherit inputs outputs;};
         modules = [
@@ -112,6 +108,7 @@
           lix-module.nixosModules.default
           (import ./nixos/xps/disko.nix)
           inputs.disko.nixosModules.default
+          sops-nix.nixosModules.sops
         ];
       };
     };
